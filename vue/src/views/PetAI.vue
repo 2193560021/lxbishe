@@ -2,31 +2,27 @@
 
   
   <div>
-    <h1 class="title" style="border-bottom: 5px solid #000 ;margin: 20px 600px">车型识别</h1>
+    <h1 class="title" style="border-bottom: 5px solid #000 ;margin: 20px 600px">宠物识别</h1>
     <el-row justify="center">
-      <el-col :span="10">
+      <el-col :span="16">
 
-        <el-upload
-            class="avatar-uploader"
-            action="http://localhost:8080/carai/upload"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            style="margin: 5px auto;width: 100%;"
-        >
-          <img  :src="car_img" id="imgshow" class="" style="width: 650px;"/>
-        </el-upload>
+<!--        <el-upload-->
+<!--            class="avatar-uploader"-->
+<!--            action="http://localhost:8080/carai/upload"-->
+<!--            :show-file-list="false"-->
+<!--            :on-success="handleAvatarSuccess"-->
+<!--            style="margin: 5px auto;width: 100%;"-->
+<!--        >-->
+<!--          <img  :src="car_img" id="imgshow" class="" style="width: 650px;"/>-->
+<!--        </el-upload>-->
+        <img src="../assets/img/pet/dog/wallhaven-ox3l65_1920x1080.png" style="width: 100%;" alt="">
 
-        <el-button type="primary" size="large" @click="CarAI" style="font-size: 19px;margin: 5px auto;width: 650px;">开始识别</el-button>
+        <el-button type="success" size="large"  style="font-size: 19px;margin: 5px auto;width: 100%;">上传图片</el-button>
+
+        <el-button type="primary" size="large" @click="PetAI" style="font-size: 19px;margin: 5px auto;width: 100%;">开始识别</el-button>
 
       </el-col>
 
-      <el-col :span="6" style="padding-top:10px;margin: 0 10px" >
-        <h2 style="margin-top: 10px">名称：{{CarResult.name}}</h2>
-        <h5 style="margin-top: 10px">年份：{{CarResult.year}}</h5>
-        <h5 style="margin-top: 10px">近似度：{{CarResult.score}}</h5>
-        <h5 style="margin-top: 10px">百度百科：<a :href="CarResultInfoBaikeUrl" target="_blank">{{CarResult.name}}</a> </h5>
-        <h6 style="margin-top: 10px">车型描述：{{CarResultInfo.description}}</h6>
-      </el-col>
     </el-row>
   </div>
 

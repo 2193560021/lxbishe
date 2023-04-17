@@ -96,21 +96,21 @@ const routes = [
       name: 'Blog',
       component: () => import("@/views/Blog")
     }, {
-      path: '/carAI',
-      name: 'CarAI',
-      component: () => import("@/views/CarAI")
+      path: '/petai',
+      name: 'PetAI',
+      component: () => import("@/views/PetAI")
     }, {
-      path: '/Refit',
-      name: 'Refit',
-      component: () => import("@/views/Refit")
+      path: '/lingyang',
+      name: 'Lingyang',
+      component: () => import("@/views/Lingyang")
     }, {
-      path: '/carlease',
-      name: 'CarLease',
-      component: () => import("@/views/CarLease")
+      path: '/buypet',
+      name: 'Buypet',
+      component: () => import("@/views/Buypet")
     }, {
-      path: '/brandsearch',
-      name: 'BrandSearch',
-      component: () => import("@/views/BrandSearch")
+      path: '/petbaike',
+      name: 'Petbaike',
+      component: () => import("@/views/Petbaike")
     }, {
       path: '/carsearch',
       name: 'CarSearch',

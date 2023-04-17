@@ -6,55 +6,22 @@
         class="el-menu-demo"
         mode="horizontal"
         router
-        background-color="#343536"
+        background-color="#e17c7c"
         text-color="#fff"
-        active-text-color="#ff2f2f"
+        active-text-color="#111"
         @select="handleSelect"
 
     >
 
       <div style="width:350px;padding-left:60px;padding-top:4px;font-weight:bold;color:#343536;font-size:20px">
-        <span style="color: #ff2f2f;font-size: 30px">汽车交流分享系统</span>
+        <span style="color: #fff;font-size: 30px">流浪动物救助平台</span>
       </div>
       <el-menu-item index="/index"><span class="header_text">首页</span></el-menu-item>
-      <el-menu-item index="/refit"><span  class="header_text">汽车改装</span></el-menu-item>
-      <el-menu-item index="/blog"><span  class="header_text">汽车博客</span></el-menu-item>
-      <el-menu-item index="/carai"><span  class="header_text">汽车识别</span></el-menu-item>
-      <el-menu-item index="/carlease"><span  class="header_text">汽车租赁</span></el-menu-item>
-      <el-menu-item index="/brandsearch"><span  class="header_text">汽车查询</span></el-menu-item>
-      <el-sub-menu index="2">
-        <template #title><span  class="header_text">汽车周边</span></template>
-        <el-menu-item >
-          <a href="https://www.wrc.com/en/" target="_blank">WRC</a></el-menu-item>
-        <el-menu-item >
-          <a href="https://www.fiawtcr.com/" target="_blank">WTCR</a>
-          </el-menu-item>
-        <el-menu-item >
-          <a href="https://www.formula1.com/" target="_blank">F1</a>
-          </el-menu-item>
-        <el-menu-item >
-          <a href="https://www.fia.com/" target="_blank">FIA-GT</a>
-          </el-menu-item>
-        <el-sub-menu>
-          <template #title>竞速游戏</template>
-          <el-menu-item>
-
-            <a href="https://baike.baidu.com/item/%E6%9E%81%E9%99%90%E7%AB%9E%E9%80%9F%EF%BC%9A%E5%9C%B0%E5%B9%B3%E7%BA%BF5/57279365?fr=aladdin" target="_blank">Forza Horizon 5</a>
-
-          </el-menu-item>
-
-          <el-menu-item>
-
-            <a href="https://store.playstation.com/en-us/product/UP0006-CUSA15081_00-NEEDFORSPEED2020" target="_blank">Need For Speed™:Heat</a>
-
-            </el-menu-item>
-          <el-menu-item>
-
-            <a href="https://baike.baidu.com/item/%E5%B0%98%E5%9F%83%E6%8B%89%E5%8A%9B%E8%B5%9B2.0/23536662?fr=aladdin" target="_blank">DiRT Rally 2.0</a>
-
-            </el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
+      <el-menu-item index="/lingyang"><span  class="header_text">流浪动物领养</span></el-menu-item>
+      <el-menu-item index="/blog"><span  class="header_text">宠物博客</span></el-menu-item>
+      <el-menu-item index="/petai"><span  class="header_text">宠物识别</span></el-menu-item>
+      <el-menu-item index="/buypet"><span  class="header_text">宠物购买</span></el-menu-item>
+      <el-menu-item index="/petbaike"><span  class="header_text">动物/宠物 百科</span></el-menu-item>
       <div id="ifLogin" style="width:100px;padding-left:250px;padding-top:20px;">
         <el-dropdown>
           <span class="el-dropdown-link">

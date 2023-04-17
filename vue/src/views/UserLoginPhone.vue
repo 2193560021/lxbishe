@@ -2,16 +2,20 @@
   <div  style="height: 100vh;overflow: hidden ;">
 
     <div class="videoContainer">
-      <video class="fullscreenVideo" style="height: 100vh;" id="bgVid" playsinline="" autoplay="" muted="" loop="">
-        <source src="../assets/img/car/car_video/160SX.mp4" style="width: 100%;height: 100vh;"  type="video/mp4">
-      </video>
+<!--      <video class="fullscreenVideo" style="height: 100vh;" id="bgVid" playsinline="" autoplay="" muted="" loop="">-->
+<!--        <source src="../assets/img/car/car_video/160SX.mp4" style="width: 100%;height: 100vh;"  type="video/mp4">-->
+<!--      </video>-->
+      <img src="../assets/img/pet/dog/wallhaven-x199ml_1920x1080.png" style="width: 100%;" alt="">
+
     </div>
 
-    <div style="width: 100%;text-align: center">
-      <img @click="$router.push('/')"  src="../assets/img/Sporty.png" style="cursor: pointer;width: 630px;height: 20vh;margin: 5px auto" alt="">
+    <div style="width: 100%;text-align: center;padding-top: 100px;padding-bottom: 30px">
+<!--      <img @click="$router.push('/')"  src="../assets/img/Sporty.png" style="cursor: pointer;width: 630px;height: 20vh;margin: 5px auto" alt="">-->
+      <span  @click="$router.push('/')" style="cursor: pointer;color: #bb2d2d;font-size: 50px;font-weight: bolder">流浪动物救助平台</span>
+
     </div>
-      <div style="background-color: rgba(43,44,47,0.9);width:480px;margin:0 auto;border-radius: 15px;padding: 10px 15px">
-        <div style="font-size:40px;font-weight:bolder;color:#fff;text-align:center;margin: 25px 0">手机登录</div>
+      <div style="opacity:0.75;background-color: #fff;width:480px;margin:0 auto;border-radius: 15px;padding: 10px 15px">
+        <div style="font-size:40px;font-weight:bolder;color:#000;text-align:center;margin: 25px 0">手机登录</div>
         <el-form :model="form" ref="form" size="large" style="text-align: center" :rules="rules">
           <el-form-item style="width: 95%;margin: 20px auto" prop="phone">
             <el-input placeholder="手机号"  :prefix-icon="UserFilled"
@@ -30,11 +34,11 @@
           <el-button type="text" style=" float: right ;margin-right: 10px" @click="$router.push('userlogin')">账号密码登录</el-button>
         </div>
         <div style="text-align: center">
-          <el-button type="danger" style="width: 45.2%;height:40px;font-size: 19px;margin: 14px 10px 20px 10px"
+          <el-button type="primary" style="width: 45.2%;height:40px;font-size: 19px;margin: 14px 10px 20px 10px"
                      @click="loginByCode"
           >登录</el-button>
 
-          <el-button type="primary" style="width: 45.2%;height:40px;font-size: 19px;margin: 14px 10px 20px 10px"
+          <el-button type="warning" style="width: 45.2%;height:40px;font-size: 19px;margin: 14px 10px 20px 10px"
                     @click="$router.push('/userregister')"
           >注册</el-button>
         </div>

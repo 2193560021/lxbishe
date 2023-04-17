@@ -1,25 +1,19 @@
 <template>
   <div>
-    <div>
-      <el-carousel :interval="4000" type="card" height="250px">
-        <el-carousel-item v-for="item in car_img" :key="item">
-          <img :src="item" class="small justify-center" style="width: 100%"/>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+
     <div>
       <el-row justify="center">
         <el-col :span="4" >
-          <el-image style="width: 100px; height: 100px" :src="car_logo[0]" fit="fit" />
+          <el-image style="width: 250px; height: 250px" :src="car_logo[0]" fit="fit" />
         </el-col>
         <el-col :span="4" >
-          <el-image style="width: 100px; height: 100px" :src="car_logo[1]" fit="fit" />
+          <el-image style="width: 250px; height: 250px" :src="car_logo[1]" fit="fit" />
         </el-col>
         <el-col :span="4"  >
-          <el-image style="width: 100px; height: 100px" :src="car_logo[2]" fit="fit" />
+          <el-image style="width: 250px; height: 250px" :src="car_logo[2]" fit="fit" />
         </el-col>
         <el-col :span="4" >
-          <el-image style="width: 100px; height: 100px" :src="car_logo[3]" fit="fit" />
+          <el-image style="width: 250px; height: 250px" :src="car_logo[3]" fit="fit" />
         </el-col>
       </el-row>
     </div>
@@ -27,22 +21,22 @@
       <el-row justify="center">
         <el-col :span="18">
           <div style="width: 100%;clear: both">
-            <h1 style="display:inline-block;margin:10px 0" >汽车查询</h1>
+            <h1 style="display:inline-block;margin:10px 0" >动物/宠物 百科</h1>
             <div style="flex: 1"></div>
             <div style="float: right;width: 50%">
 
-              <el-button type="primary" style="margin:0 10px;float: right" @click="load">搜索</el-button>
+              <el-button type="danger" style="margin:0 10px;float: right" @click="load">搜索</el-button>
               <el-input v-model="search" placeholder="请输入关键字" @keyup.enter="load" style="width: 50%;float: right"  clearable />
 
             </div>
           </div>
           <el-table :data="tableData" style="width: 100%;margin-top:20px" >
-            <el-table-column  prop="logo" label="车标" width="284">
+            <el-table-column  prop="img" label="图片" width="284">
 
               <template #default="scope">
                 <el-image
                     style="width: 90px; height: 90px;border-radius: 10px"
-                    :src="scope.row.logo"
+                    :src="scope.row.img"
                 />
               </template>
             </el-table-column>
@@ -50,7 +44,7 @@
             <el-table-column prop="englishName" label="英文名" width="284" sortable />
             <el-table-column  width="284">
               <template #default="scope">
-                <el-button size="large" @click="handleOpen(scope.row.chineseName)">详情页面></el-button>
+                <el-button size="large" type="danger" @click="handleOpen(scope.row.chineseName)">查看百科></el-button>
               </template>
             </el-table-column>>
           </el-table>
@@ -69,19 +63,19 @@ export default {
   data(){
     return{
       path:this.$route.path,
-      car_img:[
-        require("../assets/img/car/car_img/wallhaven-n63966_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-4gg7l7_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-ymzzdl_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-43kdr6.jpg")
-      ],
+
       car_logo:[
-        require("../assets/img/car/car_logo/audi.png"),
-        require("../assets/img/car/car_logo/audi.png"),
-        require("../assets/img/car/car_logo/audi.png"),
-        require("../assets/img/car/car_logo/audi.png"),
+        require("../assets/img/pet/81C92628F7AE7C31B4893529CB489B57.jpg"),
+        require("../assets/img/pet/3F8E7AABAFC7DBB27724DB57FDFACEAE.jpg"),
+        require("../assets/img/pet/9010BC26F601586B32ACABA24A4AEDBC.jpg"),
+        require("../assets/img/pet/008874E1E7E3DDD1239FDF80C8226B11.jpg"),
       ],
-      tableData:[],
+      tableData:[
+        {
+          chineseName:"哈士奇",
+          englishName:"Siberian Husky",
+        }
+      ],
       logos_img:require("../assets/img/car/car_logo/audi.png"),
       pageNum:1,
       pageSize: 100,

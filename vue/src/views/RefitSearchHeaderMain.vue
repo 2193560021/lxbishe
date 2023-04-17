@@ -8,7 +8,7 @@
           <el-col :span="8">
             <h3 style="border-bottom: 5px #ec1111 solid">精品轮毂</h3>
             <div style="width: 100%;height: 210px;float: left">
-              <img src="../assets/img/refit/refit_logo/LG/B17.jpg"
+              <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"
                    class="header_refit_logo" alt="">
               <img src="../assets/img/refit/refit_logo/LG/B18.jpg"
                    class="header_refit_logo" alt="">
@@ -16,8 +16,6 @@
                    class="header_refit_logo" alt="">
               <img src="../assets/img/refit/refit_logo/LG/B4.jpg"
                    class="header_refit_logo" alt="">
-
-
             </div>
           </el-col>
           <el-col :span="8">

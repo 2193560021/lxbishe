@@ -1,7 +1,7 @@
 <template>
-  <div style="height:50px;line-height:50px;border-bottom:1px solid #ccc;display:flex">
-      <div style="width:300px;padding-left:10px;font-weight:bold;color:dodgerblue;font-size:20px">
-        <img src="../assets/img/Sporty.png" width="180" height="50">
+  <div style="height:50px;background-color:#e17c7c;line-height:50px;display:flex">
+      <div style="width:400px;padding-left:10px;font-weight:bold;color:dodgerblue;font-size:20px">
+        <span style="color: #fff;font-size: 30px">流浪动物救助系统管理端</span>
       </div>
       <div style="flex:1"></div>
       <div style="width:100px;padding-right:30px;padding-top:18px">

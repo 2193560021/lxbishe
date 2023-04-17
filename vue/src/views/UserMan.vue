@@ -2,14 +2,14 @@
   <div class="home" style="padding:10px">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
 
     </div>
 
 <!-- 搜索区域 -->
     <div style="margin:10px 0">
       <el-input v-model="name" placeholder="请输入关键字" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
     </div>
 
     <el-table :data="tableData" border stripe style="width: 99%">

@@ -3,12 +3,14 @@
 
     <div>
       <el-row justify="center">
-        <refit-search-header-main/>
-
+<!--        <refit-search-header-main/>-->
+        <div style="overflow:hidden;height: 500px;">
+          <img src="../assets/img/pet/dog/wallhaven-ox3l65_1920x1080.png" style="width: 100%;" alt="">
+        </div>
         <div style="width: 75%;margin: 15px auto">
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
-            精品轮毂
+            流浪修狗
           </h2>
           <el-table :data="tableData_LG" style="width: 100%">
             <el-table-column  prop="img" label="图片" width="130">
@@ -20,7 +22,7 @@
             </el-table-column>
             <el-table-column prop="name" label="名称" width="450" />
             <el-table-column prop="type" label="类型" width="100" />
-            <el-table-column prop="brand" label="品牌" width="100" />
+            <el-table-column prop="brand" label="品种" width="100" />
             <el-table-column prop="price" label="定价(元)" width="100" />
             <el-table-column prop="salePrice" label="售价(元)" width="100" />
             <el-table-column  width="184" label="查看详情">
@@ -35,7 +37,7 @@
         <div style="width: 75%;height: 800px;margin: 15px auto">
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
-            刹车系统
+            流浪修咪
           </h2>
           <el-table :data="tableData_SC" style="width: 100%">
             <el-table-column  prop="img" label="图片" width="130">
@@ -62,7 +64,7 @@
         <div style="width: 75%;height: 800px;margin: 15px auto">
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
-            避震悬挂
+            其他动物
           </h2>
           <el-table :data="tableData_BZ" style="width: 100%">
             <el-table-column  prop="img" label="图片" width="130">

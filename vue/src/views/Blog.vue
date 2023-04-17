@@ -52,14 +52,14 @@ export default {
     return{
       path:this.$route.path,
       carCaseLeft_img:[
-        require("../assets/img/car/car_img/car_Case/502993.jpg"),
-        require("../assets/img/car/car_img/car_Case/bb.jpg"),
-        require("../assets/img/car/car_img/car_Case/3.webp"),
-        require("../assets/img/car/car_img/car_Case/4.webp")
+        require("../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"),
+        require("../assets/img/pet/849F2062C68EF85D8B0A6D9896A861CA.jpg"),
+        require("../assets/img/pet/812701C8995A48BBBD37E0B9BFBEE971.jpg"),
+        require("../assets/img/pet/B42AD997A8D159E84CD4299A5829A13C.jpg")
       ],
       carCaseRight_img:[
-        require("../assets/img/car/car_img/car_Case/5.webp"),
-        require("../assets/img/car/car_img/car_Case/6.webp"),
+        require("../assets/img/pet/dog/wallhaven-1jymqv_2560x1080.png"),
+        require("../assets/img/pet/dog/wallhaven-ox3l65_1920x1080.png"),
        
       ],
       showCar:[

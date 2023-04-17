@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="block text-center">
-      <el-carousel height="650px">
+      <el-carousel height="550px">
         <el-carousel-item v-for="item in car_img" >
-          <img :src="item" class="small justify-center" style="width: 100%"/>
+          <img :src="item" class="small justify-center" style="width: 100%;"/>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -118,45 +118,41 @@ export default {
     return{
       path:this.$route.path,
       car_img:[
-        require("../assets/img/car/car_img/wallhaven-n63966_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-4gg7l7_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-ymzzdl_1920x1080.png"),
-        require("../assets/img/car/car_img/wallhaven-43kdr6.jpg")
+        require("../assets/img/pet/dog/wallhaven-1jymqv_2560x1080.png"),
+        require("../assets/img/pet/dog/wallhaven-ox3l65_1920x1080.png"),
+        require("../assets/img/pet/dog/20140715112356630.jpg.source.jpg"),
+        require("../assets/img/pet/dog/20140715112350436.jpg.source.jpg")
       ],
       show_img:[
         {
-          path:require("../assets/img/car/car_img/car_Index/9.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"),
+          message:"可爱猫猫",
         },
          {
-          path:require("../assets/img/car/car_img/car_Index/12.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/849F2062C68EF85D8B0A6D9896A861CA.jpg"),
+          message:"可爱猫猫",
         },
          {
-          path:require("../assets/img/car/car_img/car_Index/13.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/812701C8995A48BBBD37E0B9BFBEE971.jpg"),
+          message:"可爱猫猫",
         },
         
         {
-          path:require("../assets/img/car/car_img/car_Index/14.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/B42AD997A8D159E84CD4299A5829A13C.jpg"),
+          message:"可爱猫猫",
         },
 
          {
-          path:require("../assets/img/car/car_img/car_Index/15.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/CC7AB3EC644EB57C92B5FC5A38EAAEE2.jpg"),
+          message:"可爱猫猫",
         },
         {
-          path:require("../assets/img/car/car_img/car_Index/16.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/E311D57F60CE95DD8A9E3864A6F56250.jpg"),
+          message:"可爱猫猫",
         },
         {
-          path:require("../assets/img/car/car_img/car_Index/17.webp"),
-          message:"暴力骑士",
-        },
-        {
-          path:require("../assets/img/car/car_img/car_Index/10.webp"),
-          message:"暴力骑士",
+          path:require("../assets/img/pet/EE75D9D769474895E409C3C0015ECF41.jpg"),
+          message:"可爱猫猫",
         },
       ],
       right_img:require("../assets/img/car/car_img/car_Index/2.webp"),

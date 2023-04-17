@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan
 @EnableTransactionManagement//开启事务支持
 @Slf4j
-public class SportyApplication {
+public class AnimalsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SportyApplication.class, args);
+        SpringApplication.run(AnimalsApplication.class, args);
         log.info("spring boot启动成功！");
     }
 
