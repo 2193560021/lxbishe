@@ -15,47 +15,39 @@ const routes = [
     }, {
       path: '/man/brandman',
       name: 'BrandMan',
-      component: () => import("@/views/BrandMan")
+      component: () => import("@/views/PetKindGuanli")
     }, {
-      path: '/man/carblogman',
-      name: 'CarBlogMan',
-      component: () => import("@/views/CarBlogMan")
+      path: '/man/PetHealthGuanli',
+      name: 'PetHealthGuanli',
+      component: () => import("@/views/PetHealthGuanli")
     }, {
       path: '/man/person',
       name: 'Person',
       component: () => import("@/views/Person")
     }, {
-      path: '/man/brandman',
-      name: 'BrandMan',
-      component: () => import("@/views/BrandMan")
+      path: '/man/PetKindGuanli',
+      name: 'PetKindGuanli',
+      component: () => import("@/views/PetKindGuanli")
     }, {
-      path: '/man/carman',
-      name: 'CarMan',
-      component: () => import("@/views/CarMan")
+      path: '/man/PetUnitGuanli',
+      name: 'PetUnitGuanli',
+      component: () => import("@/views/PetUnitGuanli")
     }, {
-      path: '/man/carleaseman',
-      name: 'CarLeaseMan',
-      component: () => import("@/views/CarLeaseMan")
+      path: '/man/PetAdoptionGuanli',
+      name: 'PetAdoptionGuanli',
+      component: () => import("@/views/PetAdoptionGuanli")
     }, {
-      path: '/man/orderman',
-      name: 'OrderMan',
-      component: () => import("@/views/OrderMan")
+      path: '/man/PetGoodsGuanli',
+      name: 'PetGoodsGuanli',
+      component: () => import("@/views/PetGoodsGuanli")
     }, {
-      path: '/man/carstoreman',
-      name: 'CarStoreMan',
-      component: () => import("@/views/CarStoreMan")
+      path: '/man/PetBlogGuanli',
+      name: 'PetBlogGuanli',
+      component: () => import("@/views/PetBlogGuanli")
     }, {
-      path: '/man/refitcaseman',
-      name: 'RefitCaseMan',
-      component: () => import("@/views/RefitCaseMan")
-    }, {
-      path: '/man/refitman',
-      name: 'RefitMan',
-      component: () => import("@/views/RefitMan")
-    }, {
-      path: '/man/refitbrandman',
-      name: 'RefitBrandMan',
-      component: () => import("@/views/RefitBrandMan")
+      path: '/man/PetOrdersGuanli',
+      name: 'PetOrdersGuanli',
+      component: () => import("@/views/PetOrdersGuanli")
     }
     ]
   }, {
@@ -84,13 +76,13 @@ const routes = [
     component: UserLayout,
     redirect:"/index",
     children: [{
-      path: 'indexsy',
-      name: 'IndexSy',
-      component: () => import("@/views/IndexSy")
-    },{
       path: 'index',
       name: 'Index',
       component: () => import("@/views/Index")
+    },{
+      path: '/lingyang',
+      name: 'Lingyang',
+      component: () => import("@/views/Lingyang")
     }, {
       path: '/blog',
       name: 'Blog',
@@ -100,10 +92,6 @@ const routes = [
       name: 'PetAI',
       component: () => import("@/views/PetAI")
     }, {
-      path: '/lingyang',
-      name: 'Lingyang',
-      component: () => import("@/views/Lingyang")
-    }, {
       path: '/buypet',
       name: 'Buypet',
       component: () => import("@/views/Buypet")
@@ -112,30 +100,18 @@ const routes = [
       name: 'Petbaike',
       component: () => import("@/views/Petbaike")
     }, {
-      path: '/carsearch',
-      name: 'CarSearch',
-      component: () => import("@/views/CarSearch")
+      path: '/PetSearch',
+      name: 'PetSearch',
+      component: () => import("@/views/PetSearch")
     }, {
       path: '/userperson',
       name: 'UserPerson',
       component: () => import("@/views/UserPerson")
     }, {
-      path: '/refitpurchase',
-      name: 'refitPurchase',
-      component: () => import("@/views/RefitPurchase")
-    }, {
-      path: '/carpurchase',
-      name: 'CarPurchase',
-      component: () => import("@/views/CarPurchase")
-    }, {
-      path: '/refitcaseessay',
-      name: 'RefitCaseEssay',
-      component: () => import("@/views/RefitCaseEssay")
-    }, {
-      path: '/refitpurchasesuccess',
-      name: 'RefitPurchaseSuccess',
-      component: () => import("@/views/RefitPurchaseSuccess")
-    }
+      path: '/PetPurchase',
+      name: 'PetPurchase',
+      component: () => import("@/views/PetPurchase")
+    },
     ]
   },
 ]

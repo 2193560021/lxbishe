@@ -102,7 +102,7 @@ export default {
     },
     handleOpen(chineseName){
       this.$router.push({
-        path: '/carsearch',
+        path: '/PetSearch',
         query: {
           chineseName: chineseName
         }

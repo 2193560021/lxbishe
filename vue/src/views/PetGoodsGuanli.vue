@@ -1,22 +1,19 @@
 <template>
-  <div class="home" style="padding:10px">
+  <div class="home" style="padding:10px;width: 79%">
     <!-- 功能区域 -->
-    <div style="margin:10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
 
-    </div>
 
 <!-- 搜索区域 -->
     <div style="margin:10px 0">
-      <el-input v-model="name" placeholder="车型名称" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-input v-model="name" placeholder="" style="width:20%" clearable />
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
     </div>
 
     <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
-<!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="汽车图片" width="280">
-<!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
+      <el-table-column prop="img" label="图片" width="200">
+        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
@@ -25,10 +22,14 @@
           />
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="车名" width="200"/>
-      <el-table-column prop="type" label="车型" width="200"/>
-      <el-table-column prop="price" label="租金（每天）" width="200"/>
-      <el-table-column label="操作" >
+      <el-table-column prop="name" label="名称" width="120"/>
+      <el-table-column prop="date" label="生产日期" width="180"/>
+      <el-table-column prop="ddl" label="保质期" width="120"/>
+      <el-table-column prop="price" label="价格" width="120"/>
+      <el-table-column prop="sale" label="销量" width="120"/>
+      <el-table-column prop="stock" label="库存" width="120"/>
+      <el-table-column prop="note" label="备注" width="120"/>
+      <el-table-column fixed="right" label="操作" width="180" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
             >编辑</el-button
@@ -71,24 +72,27 @@
         <el-form-item style="text-align: center" label-width="0">
           <el-upload
               class="avatar-uploader"
-              action="http://localhost:8080/cars/upload"
+              action="http://localhost:8080/files/upload"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               style="margin: 5px auto;width: 80%"
           >
-            <img :src="form.img" width="200" height="110" class="avatar " style="border-radius: 10px">
+            <img :src="form.img" width="90" height="90" class="avatar " style="border-radius: 10px">
           </el-upload>
         </el-form-item>
 
 
-        <el-form-item label="车名">
+        <el-form-item label="用户名">
           <el-input v-model="form.name" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="车型">
-          <el-input v-model="form.type" style="width:80%"></el-input>
+        <el-form-item label="手机号码">
+          <el-input v-model="form.phone" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="租金（每天）">
-          <el-input v-model="form.price" style="width:80%"></el-input>
+        <el-form-item label="身份证">
+          <el-input v-model="form.idCard" style="width:80%"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱">
+          <el-input v-model="form.email" style="width:80%"></el-input>
         </el-form-item>
       </el-form>
         <template #footer>
@@ -110,8 +114,9 @@ import { assertExpressionStatement } from '@babel/types'
 import  request  from '@/utils/request'
 
 
+
 export default {
-  name: 'CarLease',
+  name: 'OrderMan',
   components: {
     
   },
@@ -130,30 +135,30 @@ export default {
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/carlease",{
-        params:{
-          pageNum:this.currentPage4,
-          pageSize:this.pageSize4,
-          name:this.name
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/order",{
+    //     params:{
+    //       pageNumber:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       search:this.name
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/carlease",this.form).then(res => {
+        request.put("/order",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -164,7 +169,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/carlease",this.form).then(res => {
+        request.post("/order",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -183,7 +188,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/carlease/" + id).then(res => {
+      request.delete("/order/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -210,7 +215,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/carlease", this.form).then(res => {
+      request.put("/order", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -228,13 +233,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/user",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/order",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>

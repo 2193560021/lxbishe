@@ -1,7 +1,7 @@
 <template>
-  <div style="height:50px;background-color:#e17c7c;line-height:50px;display:flex">
-      <div style="width:400px;padding-left:10px;font-weight:bold;color:dodgerblue;font-size:20px">
-        <span style="color: #fff;font-size: 30px">流浪动物救助系统管理端</span>
+  <div style="height:50px;background-color:#c55151;line-height:50px;display:flex">
+      <div style="width:100%;padding-left:10px;font-weight:bold;color:dodgerblue;font-size:20px;text-align: center">
+        <span style="color: #fff;font-size: 30px;">流浪动物救助系统管理端</span>
       </div>
       <div style="flex:1"></div>
       <div style="width:100px;padding-right:30px;padding-top:18px">
@@ -39,14 +39,14 @@ export default {
   },
   created() {
     this.getLoginName()
-    this.checkLogin()
-
-    let str = sessionStorage.getItem("user_admin") || "{}"
-
-    if(str === '{}'){
-      this.$message.error("请先登录")
-      router.push("/man/login")
-    }
+    // this.checkLogin()
+    //
+    // let str = sessionStorage.getItem("user_admin") || "{}"
+    //
+    // if(str === '{}'){
+    //   this.$message.error("请先登录")
+    //   router.push("/man/login")
+    // }
 
   },
   methods:{
@@ -61,13 +61,13 @@ export default {
         this.loginName = JSON.parse(usermassage).name
       }
     },
-    checkLogin(){
-      request.get("/user",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/user",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   }
 }
 </script>

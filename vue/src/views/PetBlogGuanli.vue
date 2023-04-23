@@ -1,28 +1,39 @@
 <template>
-  <div class="home" style="padding:10px;width: 79%">
+  <div class="home" style="padding:10px">
     <!-- 功能区域 -->
-
+    <div style="margin:10px 0">
+    </div>
 
 <!-- 搜索区域 -->
     <div style="margin:10px 0">
-      <el-input v-model="name" placeholder="车辆订单" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-input v-model="name" placeholder="" style="width:20%" clearable />
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
     </div>
 
-    <el-table :data="tableData" border stripe style="width: 99%">
+    <el-table :data="tableData" border stripe style="width: 99%" >
       <el-empty description="description" />
-      <el-table-column fixed  prop="number" label="订单号" width="230" sortable />
-      <el-table-column prop="customerId" label="用户ID" width="230"/>
-      <el-table-column prop="name" label="商品名称" width="380"/>
-      <el-table-column prop="count" label="数量" width="80"/>
-      <el-table-column prop="payWay" label="支付方式" width="100"/>
-      <el-table-column prop="carStore" label="门店" width="180"/>
-      <el-table-column prop="price" label="单价" width="120"/>
-      <el-table-column prop="totalPrice" label="总价" width="120"/>
-      <el-table-column prop="createTime" label="下单时间" width="180"/>
-      <el-table-column fixed="right" label="操作" width="180" >
+<!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
+      <el-table-column prop="img" label="博客封面" width="120">
+<!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
+
         <template #default="scope">
-          <el-button @click="handleEdit(scope.row)"
+          <el-image
+              style="width: 90px; height: 90px;border-radius: 10px"
+              :src="scope.row.img"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="标题" width="180" sortable/>
+      <el-table-column prop="pet" label="相关动物" width="120"/>
+      <el-table-column prop="owner" label="发布人" width="100"/>
+      <el-table-column prop="ownerId" label="发布人ID" width="120"/>
+<!--      <el-table-column prop="body" label="内容" width="280"/>-->
+      <el-table-column prop="time" label="发布时间" width="100"/>
+      <el-table-column prop="views" label="浏览量" width="100"/>
+      <el-table-column label="操作">
+        <template #default="scope" >
+          <el-button @click="handleEdit(scope.row)" size="small"
             >编辑</el-button
           >
           <!-- <el-button
@@ -32,7 +43,7 @@
             >删除</el-button> -->
           <el-popconfirm title="确认删除?" type="danger" @confirm="handleDelete(scope.row.id)">
             <template #reference>
-              <el-button type="danger">删除</el-button> 
+              <el-button type="danger" size="small">删除</el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -73,17 +84,14 @@
         </el-form-item>
 
 
-        <el-form-item label="用户名">
+        <el-form-item label="门店名称">
           <el-input v-model="form.name" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="手机号码">
+        <el-form-item label="联系电话">
           <el-input v-model="form.phone" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="身份证">
-          <el-input v-model="form.idCard" style="width:80%"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input v-model="form.email" style="width:80%"></el-input>
+        <el-form-item label="门店地址">
+          <el-input v-model="form.address" style="width:80%"></el-input>
         </el-form-item>
       </el-form>
         <template #footer>
@@ -105,9 +113,8 @@ import { assertExpressionStatement } from '@babel/types'
 import  request  from '@/utils/request'
 
 
-
 export default {
-  name: 'OrderMan',
+  name: 'User',
   components: {
     
   },
@@ -126,30 +133,30 @@ export default {
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/order",{
-        params:{
-          pageNumber:this.currentPage4,
-          pageSize:this.pageSize4,
-          search:this.name
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/carstore",{
+    //     params:{
+    //       pageNum:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       name:this.name
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/order",this.form).then(res => {
+        request.put("/carstore",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -160,7 +167,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/order",this.form).then(res => {
+        request.post("/carstore",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -179,7 +186,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/order/" + id).then(res => {
+      request.delete("/carstore/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -206,7 +213,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/order", this.form).then(res => {
+      request.put("/carstore", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -224,13 +231,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/order",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/user",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>

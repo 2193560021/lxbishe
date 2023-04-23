@@ -2,33 +2,38 @@
   <div class="home" style="padding:10px">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
 
     </div>
 
     <!-- 搜索区域 -->
     <div style="margin:10px 0">
-      <el-input v-model="name" placeholder="改装案例" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-input v-model="search" placeholder="请输入关键字" style="width:20%" clearable />
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
     </div>
 
     <el-table :data="tableData" border stripe style="width: 99%">
-      <el-empty description="description" />
-      <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="封面" width="280">
-        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
+
+<!--      <el-table-column prop="id" label="ID" width="80"  />-->
+      <el-table-column prop="img" label="图片" width="210">
+<!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
+
 
         <template #default="scope">
           <el-image
-              style="width: 250px; height: 150px;border-radius: 10px"
+              style="width: 180px; height: 90px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
+
       </el-table-column>
-      <el-table-column prop="title" label="文章标题" width="400"/>
-      <el-table-column prop="car" label="相关车辆" width="180"/>
-      <el-table-column prop="type" label="类型" width="120"/>
-      <el-table-column prop="view_counts" label="浏览量" width="120"/>
+      <el-table-column prop="name" label="名称" width="120" sortable/>
+      <el-table-column prop="count" label="数量" width="120"/>
+      <el-table-column prop="price" label="付款金额" width="120"/>
+      <el-table-column prop="payTime" label="支付时间" width="120"/>
+      <el-table-column prop="customerId" label="买家ID" width="120"/>
+      <el-table-column prop="tel" label="联系方式" width="120"/>
+      <el-table-column prop="address" label="地址" width="120"/>
+      <el-table-column prop="state" label="状态" width="120"/>
       <el-table-column label="操作" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
@@ -52,7 +57,7 @@
       <el-pagination
           v-model:currentPage="currentPage4"
           v-model:page-size="pageSize4"
-          :page-sizes="[5,10, 20, 30, 40]"
+          :page-sizes="[5, 10,20,50]"
           :small="small"
           :disabled="disabled"
           :background="background"
@@ -64,45 +69,56 @@
 
 
       <el-dialog v-model="dialogVisible"
-                 title="数据"
-                 width="80%"
+                 title="新增数据"
+                 width="30%"
       >
-        <el-form :model="form" label-width="220px">
-
+        <el-form-item style="text-align: center" label-width="0">
+          <el-upload
+              class="avatar-uploader"
+              action="http://localhost:8080/refits/upload"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              style="margin: 5px auto;width: 80%"
+          >
+            <img :src="form.img" width="180" height="90" alt="品牌logo" class="avatar " style="border-radius: 10px">
+          </el-upload>
+        </el-form-item>
+        <el-form :model="form" label-width="120px">
+          <el-form-item label="名称">
+            <el-input v-model="form.name" style="width:80%"></el-input>
+          </el-form-item>
+          <el-form-item label="类型">
+<!--            <el-input v-model="form.type" style="width:80%"></el-input>-->
+            <el-select v-model="form.type" placeholder="请选择类型" style="width:80%">
+              <el-option label="精品轮毂" value="精品轮毂" />
+              <el-option label="刹车系统" value="刹车系统" />
+              <el-option label="避震悬挂" value="避震悬挂" />
+              <el-option label="进气排气" value="进气排气" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="国别">
+            <el-input v-model="form.country" style="width:80%"></el-input>
+          </el-form-item>
+          <el-form-item label="品牌介绍">
+            <textarea v-model="form.intro" style="width:80%;line-height: 18px"/>
+          </el-form-item>
           <el-form-item style="text-align: center" label-width="0">
             <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8080/files/upload"
+                action="http://localhost:8080/refits/upload"
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                style="margin: 5px auto;width: 80%"
-            >
-              <img :src="form.img" width="250" height="150" class="avatar " style="border-radius: 10px">
+                :on-success="handleAvatarSuccess1"
+                style="margin: 5px auto;width: 80%">
+              <img :src="form.img1" width="230" height="150" alt="示例图片" class="avatar " style="border-radius: 10px">
             </el-upload>
-          </el-form-item>
-
-
-          <el-form-item label="标题">
-            <el-input v-model="form.title" style="width:90%"></el-input>
-          </el-form-item>
-          <el-form-item label="类型">
-            <el-select v-model="form.type" placeholder="请选择类型" style="width:90%">
-              <el-option label="汽车" value="汽车" />
-              <el-option label="改装" value="改装" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="相关车辆">
-            <el-input v-model="form.car" style="width:90%"></el-input>
-          </el-form-item>
-          <el-form-item label="内容">
-            <textarea v-model="form.body" style="width:90%"/>
           </el-form-item>
         </el-form>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisible = false">取消</el-button>
             <el-button type="primary" @click="save"
-            >确认</el-button>
+            >确认</el-button
+            >
           </span>
         </template>
       </el-dialog>
@@ -117,7 +133,7 @@ import  request  from '@/utils/request'
 
 
 export default {
-  name: 'User',
+  name: 'RefitBrandMan',
   components: {
 
   },
@@ -125,41 +141,40 @@ export default {
     return {
       form:{},
       dialogVisible: false,
-      name:'',
+      search:'',
       currentPage4:1,
       pageSize4:5,
       total:0,
       tableData:[
 
       ],
-      userImg:require("@/assets/img/800014267.jpg")
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/refitcase",{
-        params:{
-          pageNum:this.currentPage4,
-          pageSize:this.pageSize4,
-          search:this.name
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/refitbrand",{
+    //     params:{
+    //       pageNum:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       search:this.search
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/refitcase",this.form).then(res => {
+        request.put("/refitbrand",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -170,7 +185,7 @@ export default {
           this.dialogVisible = false
         })
       } else{
-        request.post("/refitcase",this.form).then(res => {
+        request.post("/refitbrand",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -189,7 +204,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/refitcase/" + id).then(res => {
+      request.delete("/refitbrand/" + id).then(res => {
         if(res.code == 0 ){
           this.$message.success("删除成功")
         }else{
@@ -211,12 +226,18 @@ export default {
 
     },
     handleAvatarSuccess(res) {
+
       this.form.img = res.data
       this.$message.success("上传成功")
       this.update()
     },
+    handleAvatarSuccess1(res) {
+      this.form.img1 = res.data
+      this.$message.success("上传成功")
+      this.update()
+    },
     update() {
-      request.put("/refitcase", this.form).then(res => {
+      request.put("/refitbrand", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -234,13 +255,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/refitcase",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/user",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>

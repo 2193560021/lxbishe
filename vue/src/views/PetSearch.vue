@@ -18,28 +18,11 @@
         </div>
         <el-col :span="18">
 
-          <el-table :data="tableData" style="width: 100%;margin-top:20px" >
-            <el-table-column  prop="img" label="图片" width="230">
 
-              <template #default="scope">
-                <el-image
-                    style="width: 110px; height: 90px;border-radius: 10px"
-                    :src="scope.row.img"
-                />
-              </template>
-            </el-table-column>
-            <el-table-column prop="name" label="名称" width="184" sortable />
-            <el-table-column prop="type" label="类型" width="150"  />
-            <el-table-column prop="price" label="官价" width="150" sortable />
-            <el-table-column prop="sale_price" label="售价" width="150"  />
-            <el-table-column prop="repertory" label="库存" width="120"  />
-            <el-table-column  width="184" label="查看车辆"  >
+          <div style="width: 100%;border: 5px solid #000;height: 400px;margin-top: 50px">
 
-              <template #default="scope">
-                <el-button size="large" @click="handleOpen(scope.row.name)">详情页面></el-button>
-              </template>
-            </el-table-column>>
-          </el-table>
+          </div>
+
         </el-col>
       </el-row>
     </div>

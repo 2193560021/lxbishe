@@ -2,7 +2,6 @@
   <div class="home" style="padding:10px">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
-      <el-button type="danger" @click="add">新增</el-button>
 
     </div>
 
@@ -10,6 +9,7 @@
     <div style="margin:10px 0">
       <el-input v-model="name" placeholder="请输入关键字" style="width:20%" clearable />
       <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
     </div>
 
     <el-table :data="tableData" border stripe style="width: 99%">
@@ -135,23 +135,23 @@ export default {
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/user",{
-        params:{
-          pageNum:this.currentPage4,
-          pageSize:this.pageSize4,
-          name:this.name
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/user",{
+    //     params:{
+    //       pageNum:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       name:this.name
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
@@ -233,13 +233,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/user",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/user",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>

@@ -2,81 +2,24 @@
 
   <el-row class="row-bg" justify="center" gutter="20">
     <el-col :span="10">
-      <el-image :src=purchaseLeft_img :fit="cover" style="width:640px;height:480px"> </el-image>
+      <el-image :src=purchaseLeft_img :fit="cover" style="width:640px;height:400px"> </el-image>
       <h1 style="text-align:center"></h1>
     </el-col>
     <el-col :span="9">
       <div class="purchaseRight">
         <span class="title-text">{{ carName }}</span>
         <br>
-        <div class="text-info">
-          <div style="display:inline">
-          <el-icon v-for="item in 5" :key="item" color="#F7BA1E" size="20px" style="margin:10px 0"><StarFilled/></el-icon>
-          </div>
-          <span class="title-info-number" >700+</span>
-          <span class="title-info-text">条评论</span>
-          <div  class="title-info-separator"></div>
-          <span class="title-info-text">30天内</span>
-          <span class="title-info-number" >300+</span>
-          <span class="title-info-text" >盒成交</span>
-          <span class="title-info-text" style="font-size:10px;margin-left:20px">本产品采购属于商业贸易行为</span>
-        </div>
         <div class="ord-detail" style="margin-top:10px">
           <div class="ord-price-contain">
             <span class="price-header title-info-text" style="font-size:20px">
                 价格
             </span>
             <span class="price-text title-info-number">
-                ￥{{ carPrice }}
+                ￥200
             </span>
           </div>
         </div>
 
-        <div class="ord-discount">
-          <span class="price-header title-info-text" style="font-size:20px;top:2px">
-                优惠
-          </span>
-           <el-select v-model="value1" class="m-2" placeholder="￥10优惠卷，满200使用" size="small">
-          <el-option
-            v-for="item in options"
-            :key="item.value1"
-            :label="item.label"
-            :value="item.value1"
-          />
-          </el-select>
-        </div>
-
-
-        
-        <div class="ord-service" style="margin-top:10px;">
-          <span class="price-header title-info-text" style="font-size:20px;top:1px">
-                服务
-          </span>
-          <span class="ord-service-text">
-              30天免费赊账·48h发货·急速退款·不支持7天无理由退货
-          </span>
-        </div>
-
-        <div class="ord-logistics" style="margin-top:20px;">
-          <span class="price-header title-info-text" style="font-size:20px;top:1px">
-                物流
-          </span>
-          <span class="ord-service-text">
-              陕西省 西安市 <span style="color:#aaa">至</span>
-              <el-select v-model="carStore" class="m-2" placeholder="默认驿站" size="small">
-                  <el-option
-                    v-for="item in optionsAddress"
-                    :key="item.id"
-                    :label="item.name"
-                    :value="item.name"
-                  />
-              </el-select>
-              <span>
-                快递￥16,付款成功后2天发货
-              </span>
-
-          </span>
-        </div>
 
         <div class="ord-num">
           <span class="price-header title-info-text" style="font-size:20px;top:2px">
@@ -91,7 +34,7 @@
                 总价
           </span>
           <span class="price-text title-info-number" style="font-size:18px">
-                {{price*num}}万元
+                {{price*num}}元
             </span>
         </div>
 
@@ -101,14 +44,11 @@
           </span>
           <span class="pay-card">
           
-              <el-button color="#626aef" :dark="isDark" @click="confirm('支付宝')">
+              <el-button color="#333" :dark="isDark" @click="confirm('支付宝')">
               支付宝<img src="../assets/img/car/car_img/car_purchase/bao.png" alt="">
               </el-button>
-              <el-button color="#626aef" :dark="isDark" @click="confirm('微信')">
+              <el-button color="#333" :dark="isDark" @click="confirm('微信')">
               微信<img src="../assets/img/car/car_img/car_purchase/wechat.png" alt="">
-              </el-button>
-              <el-button color="#626aef" :dark="isDark" @click="confirm('银行卡')">
-              银行卡<img src="../assets/img/car/car_img/car_purchase/car.png" alt="">
               </el-button>
           </span>
         </div>
@@ -179,7 +119,7 @@ export default {
     return{
       path:this.$route.path,
       purchaseLeft_img:[
-        require("../assets/img/car/car_img/car_Case/gg.webp"),
+        require("../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"),
       ],
       carName:'',
       carPrice:'',

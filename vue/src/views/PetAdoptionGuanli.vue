@@ -2,37 +2,48 @@
   <div class="home" style="padding:10px">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
 
     </div>
 
 <!-- 搜索区域 -->
     <div style="margin:10px 0">
-      <el-input v-model="name" placeholder="4S店信息" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-input v-model="name" placeholder="" style="width:20%" clearable />
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
     </div>
 
-    <el-table :data="tableData" border stripe style="width: 99%" >
+    <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
 <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="门店logo" width="120">
+      <el-table-column prop="img" label="图片" width="200">
 <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 90px; height: 90px;border-radius: 10px"
+              style="width: 250px; height: 150px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="门店名称" width="180" sortable/>
-      <el-table-column prop="phone" label="联系电话" width="180"/>
-      <el-table-column prop="address" label="门店地址" width="380"/>
-      <el-table-column prop="focus" label="关注量" width="180"/>
-      <el-table-column prop="updateTime" label="最后更新时间" width="180"/>
-      <el-table-column label="操作">
-        <template #default="scope" >
-          <el-button @click="handleEdit(scope.row)" size="small"
+      <el-table-column prop="img" label="图片" width="200">
+        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
+
+        <template #default="scope">
+          <el-image
+              style="width: 250px; height: 180px;border-radius: 10px"
+              :src="scope.row.img"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="名称" width="110"/>
+      <el-table-column prop="age" label="年龄" width="110"/>
+      <el-table-column prop="gender" label="性别" width="130"/>
+      <el-table-column prop="liveStyle" label="习性" width="180"/>
+      <el-table-column prop="price" label="价格" width="130"/>
+      <el-table-column prop="kind" label="所属品种" width="130"/>
+      <el-table-column label="操作" >
+        <template #default="scope">
+          <el-button @click="handleEdit(scope.row)"
             >编辑</el-button
           >
           <!-- <el-button
@@ -42,7 +53,7 @@
             >删除</el-button> -->
           <el-popconfirm title="确认删除?" type="danger" @confirm="handleDelete(scope.row.id)">
             <template #reference>
-              <el-button type="danger" size="small">删除</el-button>
+              <el-button type="danger">删除</el-button> 
             </template>
           </el-popconfirm>
         </template>
@@ -73,24 +84,24 @@
         <el-form-item style="text-align: center" label-width="0">
           <el-upload
               class="avatar-uploader"
-              action="http://localhost:8080/files/upload"
+              action="http://localhost:8080/cars/upload"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               style="margin: 5px auto;width: 80%"
           >
-            <img :src="form.img" width="90" height="90" class="avatar " style="border-radius: 10px">
+            <img :src="form.img" width="200" height="110" class="avatar " style="border-radius: 10px">
           </el-upload>
         </el-form-item>
 
 
-        <el-form-item label="门店名称">
+        <el-form-item label="车名">
           <el-input v-model="form.name" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="联系电话">
-          <el-input v-model="form.phone" style="width:80%"></el-input>
+        <el-form-item label="车型">
+          <el-input v-model="form.type" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="门店地址">
-          <el-input v-model="form.address" style="width:80%"></el-input>
+        <el-form-item label="租金（每天）">
+          <el-input v-model="form.price" style="width:80%"></el-input>
         </el-form-item>
       </el-form>
         <template #footer>
@@ -113,7 +124,7 @@ import  request  from '@/utils/request'
 
 
 export default {
-  name: 'User',
+  name: 'CarLease',
   components: {
     
   },
@@ -132,30 +143,30 @@ export default {
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/carstore",{
-        params:{
-          pageNum:this.currentPage4,
-          pageSize:this.pageSize4,
-          name:this.name
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/carlease",{
+    //     params:{
+    //       pageNum:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       name:this.name
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/carstore",this.form).then(res => {
+        request.put("/carlease",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -166,7 +177,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/carstore",this.form).then(res => {
+        request.post("/carlease",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -185,7 +196,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/carstore/" + id).then(res => {
+      request.delete("/carlease/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -212,7 +223,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/carstore", this.form).then(res => {
+      request.put("/carlease", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -230,13 +241,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/user",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/user",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>

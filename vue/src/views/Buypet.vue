@@ -7,7 +7,7 @@
     </div>
     <el-row :gutter="24" style="margin:0 130px">
       <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
+        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen()">
 <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
           <div style="overflow: hidden;width:250px;height:160px" >
             <img  src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
@@ -15,6 +15,7 @@
 
           <div style="padding: 14px">
             <span> 可爱猫猫1 </span>
+            <span style="float: right;color: #f00">￥1000</span>
           </div>
         </el-card>
       </el-col>
@@ -28,6 +29,7 @@
 
           <div style="padding: 14px">
             <span> 可爱猫猫2 </span>
+            <span style="float: right;color: #f00">￥1000</span>
           </div>
         </el-card>
       </el-col>
@@ -43,6 +45,7 @@
 
           <div style="padding: 14px">
             <span> 可爱猫猫3 </span>
+            <span style="float: right;color: #f00">￥1000</span>
           </div>
         </el-card>
       </el-col>
@@ -58,6 +61,7 @@
 
           <div style="padding: 14px">
             <span> 可爱猫猫4 </span>
+            <span style="float: right;color: #f00">￥1000</span>
           </div>
         </el-card>
       </el-col>
@@ -71,6 +75,7 @@
 
           <div style="padding: 14px">
             <span> 可爱猫猫5 </span>
+            <span style="float: right;color: #f00">￥1000</span>
           </div>
         </el-card>
       </el-col>
@@ -144,12 +149,10 @@ export default {
         this.total = res.data.total
       })
     },
-    handleOpen(title){
+    handleOpen(){
       this.$router.push({
-        path: '/refitcaseessay',
-        query: {
-          search: title
-        }
+        path: '/PetPurchase',
+
       })
     }
   }

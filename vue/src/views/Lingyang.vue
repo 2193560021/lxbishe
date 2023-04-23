@@ -3,11 +3,14 @@
 
     <div>
       <el-row justify="center">
-<!--        <refit-search-header-main/>-->
         <div style="overflow:hidden;height: 500px;">
           <img src="../assets/img/pet/dog/wallhaven-ox3l65_1920x1080.png" style="width: 100%;" alt="">
         </div>
-        <div style="width: 75%;margin: 15px auto">
+        <div  style="width: 75%;margin: 0 auto">
+          <el-button @click="handleFabu" style="float: right;margin:20px 100px 0;font-size: 18px;font-weight: bolder" size="large" type="danger">发布救助信息</el-button>
+        </div>
+        <div style="width: 85%;margin: 15px auto">
+
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
             流浪修狗
@@ -16,15 +19,18 @@
             <el-table-column  prop="img" label="图片" width="130">
               <template #default="scope">
                 <el-image
-                    style="width: 90px; height: 90px;border-radius: 10px"
+                    style="width: 150px; height: 100px;border-radius: 10px"
                     :src="scope.row.img"/>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="名称" width="450" />
-            <el-table-column prop="type" label="类型" width="100" />
-            <el-table-column prop="brand" label="品种" width="100" />
-            <el-table-column prop="price" label="定价(元)" width="100" />
-            <el-table-column prop="salePrice" label="售价(元)" width="100" />
+            <el-table-column prop="name" label="名称" width="110"/>
+            <el-table-column prop="gender" label="性别" width="130"/>
+            <el-table-column prop="kind" label="所属品种" width="130"/>
+            <el-table-column prop="finder" label="发布人" width="130"/>
+            <el-table-column prop="tel" label="发布人电话" width="130"/>
+            <el-table-column prop="creatTime" label="发布时间" width="130"/>
+            <el-table-column prop="address" label="救助地址" width="130"/>
+            <el-table-column prop="note" label="备注" width="180"/>
             <el-table-column  width="184" label="查看详情">
             <template #default="scope">
               <el-button size="large" @click="handleOpen(scope.row.name)">详情页面></el-button>
@@ -34,7 +40,7 @@
         </div>
 
 
-        <div style="width: 75%;height: 800px;margin: 15px auto">
+        <div style="width: 85%;height: 800px;margin: 15px auto">
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
             流浪修咪
@@ -61,7 +67,7 @@
         </div>
 
 
-        <div style="width: 75%;height: 800px;margin: 15px auto">
+        <div style="width: 85%;height: 800px;margin: 15px auto">
           <h2 style="border-bottom: 5px #ec1111 solid;
                       text-align: center;font-weight: bolder;width: 40%;margin: 20px auto">
             其他动物
@@ -88,7 +94,61 @@
         </div>
 
       </el-row>
+
+      <el-dialog v-model="dialogVisible"
+                 title="发布救助信息"
+                 top="4vh"
+                 width="35%">
+        <el-form :model="form" label-width="120px">
+
+          <el-form-item style="text-align: center" label-width="0">
+            <el-upload
+                class="avatar-uploader"
+                action="http://localhost:8080/files/upload"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                style="margin: 5px auto;width: 80%"
+            >
+              <img :src="form.img" width="200" height="150" class="avatar " style="border-radius: 10px;">
+            </el-upload>
+          </el-form-item>
+
+          <el-form-item label="动物名称">
+            <el-input v-model="form.name" style="width:80%"></el-input>
+          </el-form-item>
+          <el-form-item label="性别">
+            <el-input v-model="form.gander" style="width:80%"></el-input>
+          </el-form-item>
+          <el-form-item label="所属品种">
+            <el-select v-model="form.kind" placeholder="请选择品种" style="width:80%">
+              <el-option label="修狗" value="1" />
+              <el-option label="修咪" value="2" />
+              <el-option label="其他动物" value="3" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="救助地址">
+            <el-input v-model="form.address" style="width:80%"></el-input>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input v-model="form.note" style="width:80%"></el-input>
+          </el-form-item>
+          <el-input v-model="form.finder" style="width:80%"></el-input>
+          <el-input v-model="form.phone" style="width:80%"></el-input>
+
+        </el-form>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogVisible = false">取消</el-button>
+            <el-button type="danger" @click="save"
+            >确认发布</el-button>
+          </span>
+        </template>
+      </el-dialog>
     </div>
+
+
+
+
   </div>
 </template>
 
@@ -97,43 +157,44 @@ import { Search } from '@element-plus/icons-vue'
 import request from "@/utils/request";
 import router from "@/router";
 
-import RefitSearchHeaderMain from "@/views/RefitSearchHeaderMain"
 
 export default {
   name: "RefitSearch",
   data(){
     return{
       path:this.$route.path,
+      dialogVisible:false,
+      form: {},
       tableData_LG:[
       //     {
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // },{
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // },{
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // },{
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // },{
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // },{
       //   img:'',
       //   name:'',
-      //   type:'精品轮毂',
+      //   type:'',
       //   country:''
       // }
 
@@ -148,9 +209,6 @@ export default {
   },
   created() {
     this.load()
-  },
-  components:{
-    RefitSearchHeaderMain
   },
   methods:{
     loadPage(){
@@ -167,13 +225,13 @@ export default {
         console.log(res);
         let lg=0,sc=0
         for(let i = 0;i < res.data.records.length;i++){
-          if(res.data.records[i].type === '精品轮毂'){
+          if(res.data.records[i].type === ''){
             this.tableData_LG[lg] = res.data.records[i]
             lg++
-          }else if(res.data.records[i].type === '刹车系统'){
+          }else if(res.data.records[i].type === ''){
             this.tableData_SC[lg] = res.data.records[i]
             lg++
-          }else if(res.data.records[i].type === '避震悬挂'){
+          }else if(res.data.records[i].type === ''){
             this.tableData_BZ[lg] = res.data.records[i]
             lg++
           }
@@ -182,12 +240,20 @@ export default {
     },
     handleOpen(name){
       this.$router.push({
-        path: '/refitpurchase',
+        path: '/',
         query: {
           name: name
         }
       })
-    }
+    },
+    handleFabu(){
+      this.dialogVisible = true
+    },
+    handleAvatarSuccess(res) {
+      this.form.img = res.data
+      this.$message.success("上传成功")
+      this.update()
+    },
   }
 }
 </script>

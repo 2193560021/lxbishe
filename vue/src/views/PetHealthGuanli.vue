@@ -2,35 +2,32 @@
   <div class="home" style="padding:10px">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
-
     </div>
 
     <!-- 搜索区域 -->
     <div style="margin:10px 0">
-      <el-input v-model="search" placeholder="请输入关键字" style="width:20%" clearable />
-      <el-button type="primary" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-input v-model="name" placeholder="" style="width:20%" clearable />
+      <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
+      <el-button type="danger" @click="add">新增</el-button>
     </div>
 
     <el-table :data="tableData" border stripe style="width: 99%">
-
-<!--      <el-table-column prop="id" label="ID" width="80"  />-->
-      <el-table-column prop="logo" label="车标" width="120">
-<!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
-
+      <el-empty description="description" />
+      <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
+      <el-table-column prop="img" label="图片" width="200">
+        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 90px; height: 90px;border-radius: 10px"
-              :src="scope.row.logo"
+              style="width: 250px; height: 150px;border-radius: 10px"
+              :src="scope.row.img"
           />
         </template>
-
       </el-table-column>
-      <el-table-column prop="chineseName" label="中文名称" width="130" sortable/>
-      <el-table-column prop="englishName" label="英文名称" width="130" sortable/>
-      <el-table-column prop="country" label="品牌国别" width="100"/>
-      <el-table-column prop="intro" label="品牌介绍" width="630"/>
+      <el-table-column prop="name" label="服务名称" width="150"/>
+      <el-table-column prop="price" label="价格" width="150"/>
+      <el-table-column prop="sale" label="销量" width="150"/>
+      <el-table-column prop="note" label="备注" width="150"/>
       <el-table-column label="操作" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
@@ -54,7 +51,7 @@
       <el-pagination
           v-model:currentPage="currentPage4"
           v-model:page-size="pageSize4"
-          :page-sizes="[5, 10, 20,100]"
+          :page-sizes="[5,10, 20, 30, 40]"
           :small="small"
           :disabled="disabled"
           :background="background"
@@ -67,40 +64,44 @@
 
       <el-dialog v-model="dialogVisible"
                  title="数据"
-                 width="30%"
+                 width="80%"
       >
-        <el-form-item style="text-align: center" label-width="0">
-          <el-upload
-              class="avatar-uploader"
-              action="http://localhost:8080/cars/upload"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              style="margin: 5px auto;width: 80%"
-          >
-            <img :src="form.logo" width="90" height="90" class="avatar " style="border-radius: 10px">
-          </el-upload>
-        </el-form-item>
-        <el-form :model="form" label-width="120px">
-          <el-form-item label="中文名称">
-            <el-input v-model="form.chineseName" style="width:80%"></el-input>
+        <el-form :model="form" label-width="220px">
+
+          <el-form-item style="text-align: center" label-width="0">
+            <el-upload
+                class="avatar-uploader"
+                action="http://localhost:8080/files/upload"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                style="margin: 5px auto;width: 80%"
+            >
+              <img :src="form.img" width="250" height="150" class="avatar " style="border-radius: 10px">
+            </el-upload>
           </el-form-item>
-          <el-form-item label="英文名称">
-            <el-input v-model="form.englishName" style="width:80%"></el-input>
+
+
+          <el-form-item label="标题">
+            <el-input v-model="form.title" style="width:90%"></el-input>
           </el-form-item>
-          <el-form-item label="品牌国别">
-            <el-input v-model="form.country" style="width:80%"></el-input>
+          <el-form-item label="类型">
+            <el-select v-model="form.type" placeholder="请选择类型" style="width:90%">
+              <el-option label="汽车" value="汽车" />
+              <el-option label="改装" value="改装" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="品牌介绍">
-<!--            <el-input></el-input>-->
-            <textarea v-model="form.intro" style="width:80%;line-height: 20px"></textarea>
+          <el-form-item label="相关车辆">
+            <el-input v-model="form.car" style="width:90%"></el-input>
+          </el-form-item>
+          <el-form-item label="内容">
+            <textarea v-model="form.body" style="width:90%"/>
           </el-form-item>
         </el-form>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisible = false">取消</el-button>
             <el-button type="primary" @click="save"
-            >确认</el-button
-            >
+            >确认</el-button>
           </span>
         </template>
       </el-dialog>
@@ -115,7 +116,7 @@ import  request  from '@/utils/request'
 
 
 export default {
-  name: 'BrandMan',
+  name: 'User',
   components: {
 
   },
@@ -123,40 +124,41 @@ export default {
     return {
       form:{},
       dialogVisible: false,
-      search:'',
+      name:'',
       currentPage4:1,
       pageSize4:5,
       total:0,
       tableData:[
 
       ],
+      userImg:require("@/assets/img/800014267.jpg")
     }
   },
   created() {
-    this.load()
-    this.checkLogin()
+    // this.load()
+    // this.checkLogin()
   },
   methods: {
-    load(){
-      request.get("/brand",{
-        params:{
-          pageNum:this.currentPage4,
-          pageSize:this.pageSize4,
-          search:this.search
-        }
-      }).then(res => {
-        console.log(res);
-        this.tableData = res.data.records
-        this.total = res.data.total
-      })
-    },
+    // load(){
+    //   request.get("/refitcase",{
+    //     params:{
+    //       pageNum:this.currentPage4,
+    //       pageSize:this.pageSize4,
+    //       search:this.name
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     this.tableData = res.data.records
+    //     this.total = res.data.total
+    //   })
+    // },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/brand",this.form).then(res => {
+        request.put("/refitcase",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -167,7 +169,7 @@ export default {
           this.dialogVisible = false
         })
       } else{
-        request.post("/brand",this.form).then(res => {
+        request.post("/refitcase",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -186,7 +188,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/brand/" + id).then(res => {
+      request.delete("/refitcase/" + id).then(res => {
         if(res.code == 0 ){
           this.$message.success("删除成功")
         }else{
@@ -208,13 +210,12 @@ export default {
 
     },
     handleAvatarSuccess(res) {
-
-      this.form.logo = res.data
+      this.form.img = res.data
       this.$message.success("上传成功")
       this.update()
     },
     update() {
-      request.put("/brand", this.form).then(res => {
+      request.put("/refitcase", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -232,13 +233,13 @@ export default {
         }
       })
     },
-    checkLogin(){
-      request.get("/user",{}).then(res => {
-        if(res.code === '-1'){
-          this.$router.push("/man/login")
-        }
-      })
-    }
+    // checkLogin(){
+    //   request.get("/refitcase",{}).then(res => {
+    //     if(res.code === '-1'){
+    //       this.$router.push("/man/login")
+    //     }
+    //   })
+    // }
   },
 }
 </script>
