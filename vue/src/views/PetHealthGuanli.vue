@@ -14,12 +14,12 @@
     <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
       <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="图片" width="200">
+      <el-table-column prop="img" label="图片" width="330">
         <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 250px; height: 150px;border-radius: 10px"
+              style="width: 300px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
@@ -27,7 +27,7 @@
       <el-table-column prop="name" label="服务名称" width="150"/>
       <el-table-column prop="price" label="价格" width="150"/>
       <el-table-column prop="sale" label="销量" width="150"/>
-      <el-table-column prop="note" label="备注" width="150"/>
+      <el-table-column prop="note" label="备注" width="250"/>
       <el-table-column label="操作" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
@@ -64,11 +64,13 @@
 
       <el-dialog v-model="dialogVisible"
                  title="数据"
-                 width="80%"
+                 top="3vh"
+                 width="50%"
       >
         <el-form :model="form" label-width="220px">
 
           <el-form-item style="text-align: center" label-width="0">
+            <img :src="form.img" width="300"  class="avatar " style="border-radius: 10px;margin: 10px auto">
             <el-upload
                 class="avatar-uploader"
                 action="http://localhost:8080/files/upload"
@@ -76,25 +78,21 @@
                 :on-success="handleAvatarSuccess"
                 style="margin: 5px auto;width: 80%"
             >
-              <img :src="form.img" width="250" height="150" class="avatar " style="border-radius: 10px">
+              <el-button type="danger" > 修改图片</el-button>
             </el-upload>
           </el-form-item>
 
-
-          <el-form-item label="标题">
-            <el-input v-model="form.title" style="width:90%"></el-input>
+          <el-form-item label="服务名称">
+            <el-input v-model="form.name" style="width:90%"></el-input>
           </el-form-item>
-          <el-form-item label="类型">
-            <el-select v-model="form.type" placeholder="请选择类型" style="width:90%">
-              <el-option label="汽车" value="汽车" />
-              <el-option label="改装" value="改装" />
-            </el-select>
+          <el-form-item label="价格">
+            <el-input v-model="form.price" style="width:90%"></el-input>
           </el-form-item>
-          <el-form-item label="相关车辆">
-            <el-input v-model="form.car" style="width:90%"></el-input>
+          <el-form-item label="销量">
+            <el-input v-model="form.sale" style="width:90%"/>
           </el-form-item>
-          <el-form-item label="内容">
-            <textarea v-model="form.body" style="width:90%"/>
+          <el-form-item label="备注">
+            <el-input v-model="form.note" style="width:90%"/>
           </el-form-item>
         </el-form>
         <template #footer>
@@ -135,30 +133,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/refitcase",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       search:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/health",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          search:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/refitcase",this.form).then(res => {
+        request.put("/health",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -169,7 +167,7 @@ export default {
           this.dialogVisible = false
         })
       } else{
-        request.post("/refitcase",this.form).then(res => {
+        request.post("/health",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -188,7 +186,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/refitcase/" + id).then(res => {
+      request.delete("/health/" + id).then(res => {
         if(res.code == 0 ){
           this.$message.success("删除成功")
         }else{
@@ -215,7 +213,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/refitcase", this.form).then(res => {
+      request.put("/health", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -233,13 +231,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/refitcase",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

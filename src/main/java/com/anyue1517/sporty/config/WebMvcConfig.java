@@ -23,6 +23,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
         log.info("开始静态资源映射");
         registry.addResourceHandler("/vue/**").addResourceLocations("classpath:/vue/");
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/")
+                .addResourceLocations("classpath:/templates/");
     }
 
     /**

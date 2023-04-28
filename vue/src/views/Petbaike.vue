@@ -31,20 +31,21 @@
             </div>
           </div>
           <el-table :data="tableData" style="width: 100%;margin-top:20px" >
-            <el-table-column  prop="img" label="图片" width="284">
+            <el-table-column  prop="img" label="图片" width="210">
 
               <template #default="scope">
                 <el-image
-                    style="width: 90px; height: 90px;border-radius: 10px"
+                    style="width: 180px;border-radius: 10px"
                     :src="scope.row.img"
                 />
               </template>
             </el-table-column>
-            <el-table-column prop="chineseName" label="中文名" width="284" sortable />
-            <el-table-column prop="englishName" label="英文名" width="284" sortable />
+            <el-table-column prop="name" label="品种名称" width="124" sortable />
+            <el-table-column prop="intro" label="品种介绍" width="584" sortable />
+            <el-table-column prop="belong" label="所属种类" width="84" sortable />
             <el-table-column  width="284">
               <template #default="scope">
-                <el-button size="large" type="danger" @click="handleOpen(scope.row.chineseName)">查看百科></el-button>
+                <el-button size="large" type="danger" @click="handleOpen(scope.row.name)">查看百科></el-button>
               </template>
             </el-table-column>>
           </el-table>
@@ -88,7 +89,7 @@ export default {
   },
   methods:{
     load(){
-      request.get("/brand",{
+      request.get("/kind",{
         params:{
           pageNum:this.pageNum,
           pageSize:this.pageSize,
@@ -100,11 +101,11 @@ export default {
         this.total = res.data.total
       })
     },
-    handleOpen(chineseName){
+    handleOpen(name){
       this.$router.push({
         path: '/PetSearch',
         query: {
-          chineseName: chineseName
+          name: name
         }
       })
     }

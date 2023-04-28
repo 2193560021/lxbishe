@@ -16,22 +16,12 @@
     <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
 <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="图片" width="200">
+      <el-table-column prop="img" label="图片" width="180">
 <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 250px; height: 180px;border-radius: 10px"
-              :src="scope.row.img"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column prop="img" label="图片" width="200">
-        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
-
-        <template #default="scope">
-          <el-image
-              style="width: 250px; height: 180px;border-radius: 10px"
+              style="width: 150px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
@@ -39,7 +29,7 @@
       <el-table-column prop="name" label="名称" width="110"/>
       <el-table-column prop="age" label="年龄" width="110"/>
       <el-table-column prop="gender" label="性别" width="130"/>
-      <el-table-column prop="liveStyle" label="习性" width="180"/>
+      <el-table-column prop="liveStyle" label="习性" width="280"/>
       <el-table-column prop="price" label="价格" width="130"/>
       <el-table-column prop="kind" label="所属品种" width="130"/>
       <el-table-column label="操作" >
@@ -78,11 +68,14 @@
 
       <el-dialog v-model="dialogVisible"
         title="数据"
-        width="30%"
+        top="3vh"
+        width="50%"
       >
       <el-form :model="form" label-width="120px">
 
         <el-form-item style="text-align: center" label-width="0">
+          <img :src="form.img" width="200" class="avatar "
+               style="border-radius: 10px;margin: 10px auto">
           <el-upload
               class="avatar-uploader"
               action="http://localhost:8080/cars/upload"
@@ -90,25 +83,28 @@
               :on-success="handleAvatarSuccess"
               style="margin: 5px auto;width: 80%"
           >
-            <img :src="form.img" width="200" height="110" class="avatar " style="border-radius: 10px">
+            <el-button type="danger" > 修改图片</el-button>
           </el-upload>
         </el-form-item>
 
 
-        <el-form-item label="车名">
+        <el-form-item label="名称">
           <el-input v-model="form.name" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="类型">
-          <el-input v-model="form.type" style="width:80%"></el-input>
+        <el-form-item label="年龄">
+          <el-input v-model="form.age" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="定价">
+        <el-form-item label="性别">
+          <el-input v-model="form.gender" style="width:80%"></el-input>
+        </el-form-item>
+        <el-form-item label="习性">
+          <el-input v-model="form.liveStyle" style="width:80%"></el-input>
+        </el-form-item>
+        <el-form-item label="价格">
           <el-input v-model="form.price" style="width:80%"></el-input>
         </el-form-item>
-        <el-form-item label="售价">
-          <el-input v-model="form.salePrice" style="width:80%"></el-input>
-        </el-form-item>
-        <el-form-item label="库存">
-          <el-input v-model="form.repertory" style="width:80%"></el-input>
+        <el-form-item label="所属品种">
+          <el-input v-model="form.kind" style="width:80%"></el-input>
         </el-form-item>
       </el-form>
         <template #footer>
@@ -150,30 +146,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/car",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       name:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/unit",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          name:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/car",this.form).then(res => {
+        request.put("/unit",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -184,7 +180,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/car",this.form).then(res => {
+        request.post("/unit",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -203,7 +199,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/car/" + id).then(res => {
+      request.delete("/unit/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -230,7 +226,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/car", this.form).then(res => {
+      request.put("/unit", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -248,13 +244,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/user",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

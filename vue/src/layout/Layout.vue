@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <Header/>
     <!-- 主体 -->
-    <div style="display:flex">
+    <div style="display:flex;">
       <!-- 侧边栏 -->
       <Aside/>
       <!-- 内容区域 -->

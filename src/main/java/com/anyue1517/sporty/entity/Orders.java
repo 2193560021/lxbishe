@@ -18,36 +18,36 @@ public class Orders {
     //id
     private Long id;
 
-    //订单号
-    private Long number;
-
-    //用户id
-    private Long customerId;
+    //商品图片
+    private String img;
 
     //商品名称
     private String name;
 
-    //商品数量
+    //用户id
+    private Long customerId;
+
+    //联系方式
+    private String tel;
+
+    //数量
     private Integer count;
 
-    //支付方式 微信 支付宝 银行卡
-    private String payWay;
+    //地址
+    private String address;
 
-    //门店地址
-    private String carStore;
-
-    //单价
+    //付款金额
     private String price;
 
-    //总价
-    private String totalPrice;
+    //状态
+    private String state;
 
     //创建时间
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     //支付时间
-    //@TableField(fill = FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime payTime;
 
     //更新时间

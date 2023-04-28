@@ -60,8 +60,7 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
       @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
+      @current-change="handleCurrentChange"/>
 
 
       <el-dialog v-model="dialogVisible"
@@ -135,23 +134,23 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/user",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       name:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/user",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          name:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
@@ -233,13 +232,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/user",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

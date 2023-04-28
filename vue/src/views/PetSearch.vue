@@ -3,16 +3,16 @@
 
     <div>
       <el-row justify="center">
-        <div style="background-color: #343536;color:#fff;width: 100%;clear: both;margin: 0 auto;float: left;padding: 40px 210px 30px">
-          <img :src="carLogo" style="background-color: #fff;border-radius: 10px;float: left" width="130" height="130" :alt="carName">
+        <div style="border-bottom: 5px solid #e17c7c;width: 100%;clear: both;margin: 0 auto;float: left;padding: 40px 210px 30px">
+          <img :src="img" style="background-color: #fff;border-radius: 10px;float: left" width="330" :alt="carName">
           <div style="width: 17%; margin:0 20px;float: left" >
-            <h1 style="font-weight: bolder">{{ carName }}</h1>
             <p style="padding: 0 5px;font-size: 20px">{{ carEngName }}</p>
             <p style="padding: 0 5px;font-size: 17px">{{ carCountry }}</p>
           </div>
           <div style="width: 65%; margin:0 20px;float: left;height: 100%;" >
+            <h1 style="font-weight: bolder;margin-bottom: 50px">{{ name }}</h1>
             <p style="font-family: 'HarmonyOS Sans SC',serif;font-size: 17px">
-              {{carIntro}}
+              {{intro}}
             </p>
           </div>
         </div>
@@ -43,11 +43,9 @@ export default {
       pageNum:1,
       pageSize: 100,
       search:'',
-      carName:'',
-      carLogo:'',
-      carEngName:'',
-      carCountry:'',
-      carIntro:''
+      name:'',
+      img:'',
+      intro:''
     }
   },
   created() {
@@ -56,28 +54,28 @@ export default {
   },
   methods:{
     load(){
-      this.carName = this.$route.query.chineseName
-      request.get("/brand",{
+      this.name = this.$route.query.name
+      request.get("/kind",{
         params:{
           pageNum:'',
           pageSize:'',
-          search:this.carName
+          search:this.name
         }
       }).then(res => {
         console.log(res);
         // this.tableData = res.data.records
         // this.total = res.data.total
 
-        this.carLogo = res.data.records[0].logo
-        this.carEngName = res.data.records[0].englishName
-        this.carCountry = res.data.records[0].country
-        this.carIntro = res.data.records[0].intro
+        this.img = res.data.records[0].img
+        this.name = res.data.records[0].name
+        this.belong = res.data.records[0].belong
+        this.intro = res.data.records[0].intro
       })
 
     },
     loadCar(){
 
-      request.get("/car",{
+      request.get("/unit",{
         params:{
           pageNum:'1',
           pageSize:'5',

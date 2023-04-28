@@ -20,7 +20,7 @@
       <el-card :body-style="{ padding: '0px' }">
         <img :src="item.path" class="image" />
         <div style="padding: 14px">
-          <span class="car-text">{{item.message}}</span>
+          <span class="unit-text">{{item.message}}</span>
           <div class="bottom">
             <time class="time">{{ currentDate }}</time>
             <el-button text class="button" >Details</el-button>
@@ -122,7 +122,7 @@ export default {
  
 }
 
-.car-text{
+.unit-text{
   font-size:14px;
   font-weight: 600;
   font-family:Arial, sans-serif;

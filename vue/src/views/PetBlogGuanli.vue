@@ -14,23 +14,23 @@
     <el-table :data="tableData" border stripe style="width: 99%" >
       <el-empty description="description" />
 <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="博客封面" width="120">
+      <el-table-column prop="img" label="博客封面" width="260">
 <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 90px; height: 90px;border-radius: 10px"
+              style="width: 230px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="标题" width="180" sortable/>
-      <el-table-column prop="pet" label="相关动物" width="120"/>
-      <el-table-column prop="owner" label="发布人" width="100"/>
-      <el-table-column prop="ownerId" label="发布人ID" width="120"/>
+      <el-table-column prop="title" label="标题" width="210" />
+      <el-table-column prop="pet" label="相关动物" width="100"/>
+      <el-table-column prop="owner" label="发布人" width="130"/>
+      <el-table-column prop="ownerId" label="发布人ID" width="220"/>
 <!--      <el-table-column prop="body" label="内容" width="280"/>-->
-      <el-table-column prop="time" label="发布时间" width="100"/>
-      <el-table-column prop="views" label="浏览量" width="100"/>
+      <el-table-column prop="createTime" label="发布时间" width="200" sortable/>
+      <el-table-column prop="views" label="浏览量" width="80"/>
       <el-table-column label="操作">
         <template #default="scope" >
           <el-button @click="handleEdit(scope.row)" size="small"
@@ -79,19 +79,19 @@
               :on-success="handleAvatarSuccess"
               style="margin: 5px auto;width: 80%"
           >
-            <img :src="form.img" width="90" height="90" class="avatar " style="border-radius: 10px">
+            <img :src="form.img" width="190" class="avatar " style="border-radius: 10px">
           </el-upload>
         </el-form-item>
 
 
-        <el-form-item label="门店名称">
-          <el-input v-model="form.name" style="width:80%"></el-input>
+        <el-form-item label="文章标题">
+          <el-input v-model="form.title" style="width:80%"></el-input>
         </el-form-item>
         <el-form-item label="联系电话">
           <el-input v-model="form.phone" style="width:80%"></el-input>
         </el-form-item>
         <el-form-item label="门店地址">
-          <el-input v-model="form.address" style="width:80%"></el-input>
+          <el-input  v-model="form.address" style="width:80%"></el-input>
         </el-form-item>
       </el-form>
         <template #footer>
@@ -133,30 +133,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/carstore",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       name:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/blog",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          name:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/carstore",this.form).then(res => {
+        request.put("/blog",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -167,7 +167,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/carstore",this.form).then(res => {
+        request.post("/blog",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -186,7 +186,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/carstore/" + id).then(res => {
+      request.delete("/blog/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -213,7 +213,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/carstore", this.form).then(res => {
+      request.put("/blog", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -231,13 +231,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/user",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

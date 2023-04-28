@@ -17,7 +17,7 @@
         <span style="color: #fff;font-size: 30px">流浪动物救助平台</span>
       </div>
       <el-menu-item index="/index"><span class="header_text">首页</span></el-menu-item>
-      <el-menu-item index="/lingyang"><span  class="header_text">流浪动物领养</span></el-menu-item>
+      <el-menu-item index="/adoption"><span  class="header_text">流浪动物领养</span></el-menu-item>
       <el-menu-item index="/blog"><span  class="header_text">宠物博客</span></el-menu-item>
       <el-menu-item index="/petai"><span  class="header_text">宠物识别</span></el-menu-item>
       <el-menu-item index="/buypet"><span  class="header_text">宠物购买</span></el-menu-item>

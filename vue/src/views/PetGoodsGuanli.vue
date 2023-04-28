@@ -12,24 +12,24 @@
 
     <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
-      <el-table-column prop="img" label="图片" width="200">
+      <el-table-column prop="img" label="图片" width="160">
         <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 250px; height: 150px;border-radius: 10px"
+              style="width: 130px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="名称" width="120"/>
+      <el-table-column prop="name" label="名称" width="180"/>
       <el-table-column prop="date" label="生产日期" width="180"/>
       <el-table-column prop="ddl" label="保质期" width="120"/>
       <el-table-column prop="price" label="价格" width="120"/>
       <el-table-column prop="sale" label="销量" width="120"/>
       <el-table-column prop="stock" label="库存" width="120"/>
-      <el-table-column prop="note" label="备注" width="120"/>
-      <el-table-column fixed="right" label="操作" width="180" >
+      <el-table-column prop="note" label="备注" width="150"/>
+      <el-table-column fixed="right" label="操作" width="" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
             >编辑</el-button
@@ -135,30 +135,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/order",{
-    //     params:{
-    //       pageNumber:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       search:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/goods",{
+        params:{
+          pageNumber:this.currentPage4,
+          pageSize:this.pageSize4,
+          search:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/order",this.form).then(res => {
+        request.put("/goods",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -169,7 +169,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/order",this.form).then(res => {
+        request.post("/goods",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -188,7 +188,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/order/" + id).then(res => {
+      request.delete("/goods/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -215,7 +215,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/order", this.form).then(res => {
+      request.put("/goods", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -233,13 +233,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/order",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/order",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

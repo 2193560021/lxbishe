@@ -15,32 +15,24 @@
     <el-table :data="tableData" border stripe style="width: 99%">
       <el-empty description="description" />
 <!--      <el-table-column prop="id" label="ID" width="80" sortable />-->
-      <el-table-column prop="img" label="图片" width="200">
+      <el-table-column prop="img" label="图片" width="210">
 <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
         <template #default="scope">
           <el-image
-              style="width: 250px; height: 150px;border-radius: 10px"
+              style="width: 180px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
       </el-table-column>
-      <el-table-column prop="img" label="图片" width="200">
-        <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
-
-        <template #default="scope">
-          <el-image
-              style="width: 250px; height: 180px;border-radius: 10px"
-              :src="scope.row.img"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column prop="name" label="名称" width="110"/>
-      <el-table-column prop="age" label="年龄" width="110"/>
-      <el-table-column prop="gender" label="性别" width="130"/>
-      <el-table-column prop="liveStyle" label="习性" width="180"/>
-      <el-table-column prop="price" label="价格" width="130"/>
+      <el-table-column prop="name" label="名称" width="140"/>
+      <el-table-column prop="gender" label="性别" width="80"/>
       <el-table-column prop="kind" label="所属品种" width="130"/>
+      <el-table-column prop="finder" label="发布人" width="180"/>
+      <el-table-column prop="tel" label="联系电话" width="130"/>
+      <el-table-column prop="address" label="领养地址" width="180"/>
+      <el-table-column prop="note" label="备注" width="130"/>
+      <el-table-column prop="state" label="状态" width="80"/>
       <el-table-column label="操作" >
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)"
@@ -143,30 +135,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/carlease",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       name:this.name
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/adoption",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          name:this.name
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/carlease",this.form).then(res => {
+        request.put("/adoption",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -177,7 +169,7 @@ export default {
         this.dialogVisible = false
         })
       } else{
-        request.post("/carlease",this.form).then(res => {
+        request.post("/adoption",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -196,7 +188,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/carlease/" + id).then(res => {
+      request.delete("/adoption/" + id).then(res => {
         if(res.code == 0 ){
             this.$message.success("删除成功")
           }else{
@@ -223,7 +215,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/carlease", this.form).then(res => {
+      request.put("/adoption", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -241,13 +233,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/user",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

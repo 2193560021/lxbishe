@@ -1,7 +1,6 @@
 package com.anyue1517.sporty.controller;
 
 import com.anyue1517.sporty.common.Result;
-import com.anyue1517.sporty.entity.Brand;
 import com.anyue1517.sporty.entity.Culture;
 import com.anyue1517.sporty.service.CultureService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

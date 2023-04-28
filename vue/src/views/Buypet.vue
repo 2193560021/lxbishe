@@ -3,99 +3,45 @@
 
 
     <div style="text-align: center;margin: 10px 0 10px">
-      <div style="font-size: 35px;font-weight: bolder;margin: 10px auto;width: 20%;border-bottom: #000 solid 5px">猫猫狗狗</div>
+      <div style="font-size: 35px;font-weight: bolder;margin: 10px auto;width: 20%;border-bottom: #000 solid 5px">宠物购买</div>
     </div>
     <el-row :gutter="24" style="margin:0 130px">
-      <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen()">
+      <el-col :span="6" v-for="item in Pets" :key="item"  style="">
+        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.name)">
 <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
-          <div style="overflow: hidden;width:250px;height:160px" >
-            <img  src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
+          <div style="overflow: hidden;width:250px;" >
+            <img  :src="item.img"  class="image" style="width: 100%;"  alt=""/>
           </div>
 
           <div style="padding: 14px">
-            <span> 可爱猫猫1 </span>
-            <span style="float: right;color: #f00">￥1000</span>
+            <span>{{item.name}} </span>
+            <span style="float: right;color: #f00">￥{{ item.price }}</span>
           </div>
         </el-card>
       </el-col>
-
-      <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
-          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
-          <div style="overflow: hidden;width:250px;height:160px" >
-            <img  src="../assets/img/pet/849F2062C68EF85D8B0A6D9896A861CA.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
-          </div>
-
-          <div style="padding: 14px">
-            <span> 可爱猫猫2 </span>
-            <span style="float: right;color: #f00">￥1000</span>
-          </div>
-        </el-card>
-      </el-col>
-
-
-
-      <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
-          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
-          <div style="overflow: hidden;width:250px;height:160px" >
-            <img  src="../assets/img/pet/812701C8995A48BBBD37E0B9BFBEE971.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
-          </div>
-
-          <div style="padding: 14px">
-            <span> 可爱猫猫3 </span>
-            <span style="float: right;color: #f00">￥1000</span>
-          </div>
-        </el-card>
-      </el-col>
-
-
-
-      <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
-          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
-          <div style="overflow: hidden;width:250px;height:160px" >
-            <img  src="../assets/img/pet/B42AD997A8D159E84CD4299A5829A13C.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
-          </div>
-
-          <div style="padding: 14px">
-            <span> 可爱猫猫4 </span>
-            <span style="float: right;color: #f00">￥1000</span>
-          </div>
-        </el-card>
-      </el-col>
-
-      <el-col :span="6"  style="">
-        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
-          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
-          <div style="overflow: hidden;width:250px;height:160px" >
-            <img  src="../assets/img/pet/CC7AB3EC644EB57C92B5FC5A38EAAEE2.jpg"  class="image" style="width: 100%;height: 100%;"  alt=""/>
-          </div>
-
-          <div style="padding: 14px">
-            <span> 可爱猫猫5 </span>
-            <span style="float: right;color: #f00">￥1000</span>
-          </div>
-        </el-card>
-      </el-col>
-
 
 
     </el-row>
 
-
-    <div style="text-align: center;margin: 10px 0 10px">
-      <div style="font-size: 35px;font-weight: bolder;margin: 10px auto;width: 20%;border-bottom: #000 solid 5px">其他宠物</div>
-    </div>
-    <el-row :gutter="24" style="margin:0 130px">
-
-    </el-row>
 
     <div style="text-align: center;margin: 10px 0 10px">
       <div style="font-size: 35px;font-weight: bolder;margin: 10px auto;width: 20%;border-bottom: #000 solid 5px">宠物用品</div>
     </div>
     <el-row :gutter="24" style="margin:0 130px">
+
+      <el-col :span="6" v-for="item in Goods" :key="item"  style="">
+        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
+          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
+          <div style="overflow: hidden;width:250px;height:160px" >
+            <img  :src="item.img"  class="image" style="width: 100%;height: 100%;"  alt=""/>
+          </div>
+
+          <div style="padding: 14px">
+            <span>{{item.name}} </span>
+            <span style="float: right;color: #f00">￥{{ item.price }}</span>
+          </div>
+        </el-card>
+      </el-col>
 
     </el-row>
 
@@ -103,6 +49,20 @@
       <div style="font-size: 35px;font-weight: bolder;margin: 10px auto;width: 20%;border-bottom: #000 solid 5px">医疗用品</div>
     </div>
     <el-row :gutter="24" style="margin:0 130px">
+
+      <el-col :span="6" v-for="item in Health" :key="item"  style="">
+        <el-card style="width:290px;margin:20px 0;cursor: pointer" @click="handleOpen(item.title)">
+          <!--                    <img src="../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg" class="image" style="width:250px;height:190px"/>-->
+          <div style="overflow: hidden;width:250px;height:160px" >
+            <img  :src="item.img"  class="image" style="width: 100%;height: 100%;"  alt=""/>
+          </div>
+
+          <div style="padding: 14px">
+            <span>{{item.name}} </span>
+            <span style="float: right;color: #f00">￥{{ item.price }}</span>
+          </div>
+        </el-card>
+      </el-col>
 
     </el-row>
 
@@ -128,7 +88,9 @@ export default {
         require("../assets/img/car/car_img/car_News/CarNews_right_2.gif"),
 
       ],
-      showCar:[],
+      Pets:[],
+      Goods:[],
+      Health:[],
 
     }
   },
@@ -137,22 +99,48 @@ export default {
   },
   methods:{
     load(){
-      request.get("/refitcase",{
+      request.get("/unit",{
         params:{
           pageNum:1,
-          pageSize:100,
+          pageSize:1000,
           search:''
         }
       }).then(res => {
         console.log(res);
-        this.showCar = res.data.records
+        this.Pets = res.data.records
+        this.total = res.data.total
+      })
+
+      request.get("/goods",{
+        params:{
+          pageNum:1,
+          pageSize:1000,
+          search:''
+        }
+      }).then(res => {
+        console.log(res);
+        this.Goods = res.data.records
+        this.total = res.data.total
+      })
+
+      request.get("/health",{
+        params:{
+          pageNum:1,
+          pageSize:1000,
+          search:''
+        }
+      }).then(res => {
+        console.log(res);
+        this.Health = res.data.records
         this.total = res.data.total
       })
     },
-    handleOpen(){
+    handleOpen(name){
       this.$router.push({
         path: '/PetPurchase',
-
+        query:{
+          name:name
+        }
       })
     }
   }

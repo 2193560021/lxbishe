@@ -80,13 +80,21 @@ const routes = [
       name: 'Index',
       component: () => import("@/views/Index")
     },{
-      path: '/lingyang',
-      name: 'Lingyang',
-      component: () => import("@/views/Lingyang")
+      path: '/adoption',
+      name: 'Adoption',
+      component: () => import("@/views/Adoption")
+    },{
+      path: '/adoptionpet',
+      name: 'AdoptionPet',
+      component: () => import("@/views/AdoptionPet")
     }, {
       path: '/blog',
       name: 'Blog',
       component: () => import("@/views/Blog")
+    }, {
+      path: '/blogdetail',
+      name: 'BlogDetail',
+      component: () => import("@/views/BlogDetail")
     }, {
       path: '/petai',
       name: 'PetAI',

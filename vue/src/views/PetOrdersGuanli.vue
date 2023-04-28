@@ -1,5 +1,5 @@
 <template>
-  <div class="home" style="padding:10px">
+  <div class="home" style="padding:10px;width: 100%;">
     <!-- 功能区域 -->
     <div style="margin:10px 0">
 
@@ -11,32 +11,33 @@
       <el-button type="danger" style="margin:0 10px" @click="load">搜索</el-button>
     </div>
 
-    <el-table :data="tableData" border stripe style="width: 99%">
+    <el-table :data="tableData" border stripe style="width: 100%">
 
+      <el-table-column prop="id" label="订单号" width="200" />
 <!--      <el-table-column prop="id" label="ID" width="80"  />-->
-      <el-table-column prop="img" label="图片" width="210">
+      <el-table-column prop="img" label="图片" width="110">
 <!--        <img :src="userImg" alt="" width="90" height="90" style="border-radius: 10px">-->
 
 
         <template #default="scope">
           <el-image
-              style="width: 180px; height: 90px;border-radius: 10px"
+              style="width: 80px;border-radius: 10px"
               :src="scope.row.img"
           />
         </template>
 
       </el-table-column>
-      <el-table-column prop="name" label="名称" width="120" sortable/>
-      <el-table-column prop="count" label="数量" width="120"/>
+      <el-table-column prop="name" label="名称" width="100" sortable/>
+      <el-table-column prop="count" label="数量" width="60"/>
       <el-table-column prop="price" label="付款金额" width="120"/>
       <el-table-column prop="payTime" label="支付时间" width="120"/>
-      <el-table-column prop="customerId" label="买家ID" width="120"/>
+      <el-table-column prop="customerId" label="买家ID" width="220"/>
       <el-table-column prop="tel" label="联系方式" width="120"/>
       <el-table-column prop="address" label="地址" width="120"/>
-      <el-table-column prop="state" label="状态" width="120"/>
-      <el-table-column label="操作" >
+      <el-table-column prop="state" label="状态" width="80"/>
+      <el-table-column label="操作" fixed="right" >
         <template #default="scope">
-          <el-button @click="handleEdit(scope.row)"
+          <el-button size="small" @click="handleEdit(scope.row)"
           >编辑</el-button
           >
           <!-- <el-button
@@ -46,7 +47,7 @@
             >删除</el-button> -->
           <el-popconfirm title="确认删除?" type="danger" @confirm="handleDelete(scope.row.id)">
             <template #reference>
-              <el-button type="danger">删除</el-button>
+              <el-button size="small" type="danger">删除</el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -151,30 +152,30 @@ export default {
     }
   },
   created() {
-    // this.load()
-    // this.checkLogin()
+    this.load()
+    this.checkLogin()
   },
   methods: {
-    // load(){
-    //   request.get("/refitbrand",{
-    //     params:{
-    //       pageNum:this.currentPage4,
-    //       pageSize:this.pageSize4,
-    //       search:this.search
-    //     }
-    //   }).then(res => {
-    //     console.log(res);
-    //     this.tableData = res.data.records
-    //     this.total = res.data.total
-    //   })
-    // },
+    load(){
+      request.get("/orders",{
+        params:{
+          pageNum:this.currentPage4,
+          pageSize:this.pageSize4,
+          search:this.search
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    },
     add(){
       this.dialogVisible = true
       this.form = {}
     },
     save(){
       if(this.form.id){
-        request.put("/refitbrand",this.form).then(res => {
+        request.put("/orders",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("更新成功")
@@ -185,7 +186,7 @@ export default {
           this.dialogVisible = false
         })
       } else{
-        request.post("/refitbrand",this.form).then(res => {
+        request.post("/orders",this.form).then(res => {
           console.log(res)
           if(res.code == 0 ){
             this.$message.success("新增成功")
@@ -204,7 +205,7 @@ export default {
     },
     handleDelete(id){
       console.log(id);
-      request.delete("/refitbrand/" + id).then(res => {
+      request.delete("/orders/" + id).then(res => {
         if(res.code == 0 ){
           this.$message.success("删除成功")
         }else{
@@ -237,7 +238,7 @@ export default {
       this.update()
     },
     update() {
-      request.put("/refitbrand", this.form).then(res => {
+      request.put("/orders", this.form).then(res => {
         console.log(res)
         if (res.code === '0') {
           this.$message({
@@ -255,13 +256,13 @@ export default {
         }
       })
     },
-    // checkLogin(){
-    //   request.get("/user",{}).then(res => {
-    //     if(res.code === '-1'){
-    //       this.$router.push("/man/login")
-    //     }
-    //   })
-    // }
+    checkLogin(){
+      request.get("/user",{}).then(res => {
+        if(res.code === '-1'){
+          this.$router.push("/man/login")
+        }
+      })
+    }
   },
 }
 </script>

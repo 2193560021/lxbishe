@@ -1,10 +1,8 @@
 package com.anyue1517.sporty.controller;
 
 import com.anyue1517.sporty.common.Result;
-import com.anyue1517.sporty.entity.Refit;
 import com.anyue1517.sporty.entity.RefitBrand;
 import com.anyue1517.sporty.service.RefitBrandService;
-import com.anyue1517.sporty.service.RefitService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang.StringUtils;

@@ -1,96 +1,159 @@
 <template>
 
   <el-row class="row-bg" justify="center" gutter="20">
-    <el-col :span="10">
-      <el-image :src=purchaseLeft_img :fit="cover" style="width:640px;height:400px"> </el-image>
+    <el-col :span="8">
+      <el-image :src=purchaseLeft_img :fit="cover" style="height:500px"> </el-image>
       <h1 style="text-align:center"></h1>
     </el-col>
     <el-col :span="9">
       <div class="purchaseRight">
-        <span class="title-text">{{ carName }}</span>
+        <span class="title-text">{{ petName }}</span>
+        <span style="margin-left: 10px">品种：{{ kind }}</span>
+        <span style="margin-left: 10px">性别：{{ gender }}</span>
+        <span style="margin-left: 25px">{{ age }} 岁</span>
         <br>
-        <div class="ord-detail" style="margin-top:10px">
-          <div class="ord-price-contain">
-            <span class="price-header title-info-text" style="font-size:20px">
-                价格
-            </span>
-            <span class="price-text title-info-number">
-                ￥200
-            </span>
-          </div>
+        <br>
+
+
+
+        <el-descriptions
+            class="margin-top"
+            title="数据概览"
+            :column="1"
+            :size="size"
+            border
+        >
+          <el-descriptions-item>
+            <template #label>
+              <div class="cell-item">
+                品种
+              </div>
+            </template>
+            <el-tag size="large">{{ kind }}</el-tag>
+
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template #label>
+              <div class="cell-item">
+                性别
+              </div>
+            </template>
+            {{ gender }}
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template #label>
+              <div class="cell-item">
+                年龄
+              </div>
+            </template>
+            {{ age }}
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template #label>
+              <div class="cell-item">
+                相关信息
+              </div>
+            </template>
+            {{ liveStyle }}
+          </el-descriptions-item><el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              价格
+            </div>
+          </template>
+          <span style="color: #f00;font-weight: bolder">
+            ￥{{ price }}
+          </span>
+        </el-descriptions-item>
+
+        </el-descriptions>
+
+
+        <div style="width: 100%;margin-top: 20px">
+          <el-button @click="buy" style="font-size: 22px;width: 100%;height: 50px;" type="danger">立即支付</el-button>
         </div>
 
 
-        <div class="ord-num">
-          <span class="price-header title-info-text" style="font-size:20px;top:2px">
-                数量
-          </span>
-          <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
-        </div>
 
 
-        <div class="ord-totalprice" style="margin:25px 0">
-          <span class="price-header title-info-text" style="font-size:20px;bottom: 5px;">
-                总价
-          </span>
-          <span class="price-text title-info-number" style="font-size:18px">
-                {{price*num}}元
-            </span>
-        </div>
+<!--        <el-dialog v-model="dialogVisible"-->
+<!--                   title="订单确认"-->
+<!--                   width="40%"-->
+<!--        >-->
+<!--          <div  width="120">-->
 
-        <div class="pay-way">
-            <span class="price-header title-info-text" style="font-size:20px;top:1px">
-                支付
-          </span>
-          <span class="pay-card">
-          
-              <el-button color="#333" :dark="isDark" @click="confirm('支付宝')">
-              支付宝<img src="../assets/img/car/car_img/car_purchase/bao.png" alt="">
-              </el-button>
-              <el-button color="#333" :dark="isDark" @click="confirm('微信')">
-              微信<img src="../assets/img/car/car_img/car_purchase/wechat.png" alt="">
-              </el-button>
-          </span>
-        </div>
+<!--            <div style="text-align: center;margin: 0 auto">-->
+<!--              <img :src=purchaseLeft_img width="290" height="210" class="avatar " style="border-radius: 10px">-->
+<!--            </div>-->
+<!--            <div style="width: 300px;margin: 20px auto">-->
+<!--              商品名称：{{carName}}-->
+<!--            </div>-->
+<!--            <div style="width: 300px;margin: 20px auto">-->
+<!--              商品数量：{{num}}-->
+<!--            </div>-->
+<!--            <div style="width: 300px;margin: 20px auto">-->
+<!--              支付方式：{{payWay}}-->
+<!--            </div>-->
+<!--            <div style="width: 300px;margin: 20px auto">-->
+<!--              门店地址：{{health}}-->
+<!--            </div>-->
+<!--            <div style="width: 300px;margin: 20px auto">-->
+<!--              总价：{{onePrice*10000*num}}-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <div style="width: 300px;margin: 20px auto">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{customerId}}&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--          </div>-->
+<!--          <template #footer>-->
+<!--          <span class="dialog-footer">-->
+<!--            <el-button @click="dialogVisible = false">取消</el-button>-->
+<!--            <el-button type="primary" @click="save">确认</el-button>-->
+<!--          </span>-->
+<!--          </template>-->
+<!--        </el-dialog>-->
 
 
         <el-dialog v-model="dialogVisible"
                    title="订单确认"
-                   width="40%"
-        >
-          <div  width="120">
+                   top="3vh"
+                   width="40%">
+          <el-form  label-width="120px">
 
-            <div style="text-align: center;margin: 0 auto">
-              <img :src=purchaseLeft_img width="290" height="210" class="avatar " style="border-radius: 10px">
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              商品名称：{{carName}}
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              商品数量：{{num}}
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              支付方式：{{payWay}}
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              门店地址：{{carStore}}
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              单价：{{onePrice*10000}}
-            </div>
-            <div style="width: 300px;margin: 20px auto">
-              总价：{{onePrice*10000*num}}
-            </div>
+            <el-form-item style="text-align: center" label-width="0">
+              <el-upload
+                  class="avatar-uploader"
+                  action="http://localhost:8080/files/upload"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  style="margin: 5px auto;width: 80%"
+              >
+                <img :src="this.purchaseLeft_img" width="200" height="300" class="avatar " style="border-radius: 10px;">
+              </el-upload>
+            </el-form-item>
 
-<!--            <div style="width: 300px;margin: 20px auto">-->
-<!--              {{customerId}}-->
-<!--            </div>-->
-
-          </div>
+            <el-form-item label="商品名称">
+              <el-input disabled v-model="this.petName" style="width:80%"></el-input>
+            </el-form-item>
+            <el-form-item label="商品数量">
+              <el-input v-model="this.count" style="width:80%"></el-input>
+            </el-form-item>
+            <el-form-item label="买家ID">
+              <el-input disabled v-model="this.customerId" style="width:80%"></el-input>
+            </el-form-item>
+            <el-form-item label="联系电话">
+              <el-input v-model="this.tel" style="width:80%"></el-input>
+            </el-form-item>
+            <el-form-item label="联系地址">
+              <el-input v-model="this.address" style="width:80%"></el-input>
+            </el-form-item>
+          </el-form>
           <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisible = false">取消</el-button>
-            <el-button type="primary" @click="save">确认</el-button>
+            <el-button type="danger" @click="save"
+            >确认购买</el-button>
           </span>
           </template>
         </el-dialog>
@@ -121,7 +184,7 @@ export default {
       purchaseLeft_img:[
         require("../assets/img/pet/5EB08B1E94952C4464CC8DD8978EA4E4.jpg"),
       ],
-      carName:'',
+      petName:'',
       carPrice:'',
       optionsAddress:[],
       price:'',
@@ -129,36 +192,50 @@ export default {
       dialogVisible:false,
       payWay:'',
       onePrice:'',
-      carStore:'',
+      health:'',
       allPrice:'',
-      customerId:''
+      gender:'',
+      age:'',
+      kind:'',
+      liveStyle:'',
+      customerId:'',
+      count:1,
+      address:''
+
 
     }
   },
   created() {
+
+    let str = sessionStorage.getItem("user") || "{}"
+
+    this.form = JSON.parse(str)
+
+    this.customerId = this.form.id
+    this.tel = this.form.phone
     this.load()
     this.loadCarStore()
   },
   methods:{
      save(){
        if(this.customerId !== '' &&
-           this.carName !== '' &&
-           this.num !== '' &&
-           this.payWay !== '' &&
-           this.payWay !== '' &&
-           this.carStore !== '' &&
-           this.onePrice !== '' ){
-         request.post("/order",{
+           this.name !== '' &&
+           this.tel !== '' &&
+           this.address !== '' &&
+           this.price !== ''  ){
+         request.post("/orders",{
+           img:this.purchaseLeft_img,
            customerId:this.customerId,
-           name:this.carName,
-           count:this.num,
-           payWay:this.payWay,
-           carStore:this.carStore,
-           price:this.onePrice*10000,
-           totalPrice:this.price*this.num*10000
+           name:this.petName,
+           tel:this.tel,
+           count:this.count,
+           address:this.address,
+           price:this.price,
+           state:'已购买'
          }).then(res => {
            if(res.code === '0'){
-             this.$router.push("/refitpurchasesuccess")
+             this.dialogVisible = false
+             this.$message.success("购买成功")
            }else if (res.code === '-1'){
              this.$message.error("出错了")
            }
@@ -168,8 +245,8 @@ export default {
        }
      },
      load(){
-       this.carName = this.$route.query.name
-       request.get("/car",{
+       this.petName = this.$route.query.name
+       request.get("/unit",{
          params:{
            pageNum:'1',
            pageSize:'5',
@@ -181,7 +258,13 @@ export default {
          // this.total = res1.data.total
 
          this.purchaseLeft_img = res.data.records[0].img
-         this.carPrice = res.data.records[0].price
+         this.price = res.data.records[0].price
+         this.gender = res.data.records[0].gender
+         this.age = res.data.records[0].age
+         this.kind = res.data.records[0].kind
+         this.liveStyle = res.data.records[0].liveStyle
+
+
          let str = res.data.records[0].price.indexOf('-')
          if(str !== -1){
            this.onePrice = res.data.records[0].price.split("-")[0]
@@ -195,6 +278,14 @@ export default {
          // this.carIntro = res.data.records[0].intro
        })
      },
+    buy(){
+      this.dialogVisible = true
+      let str = sessionStorage.getItem("user") || "{}"
+      if(str === '{}'){
+        this.$message.error("请先登录")
+        router.push("/userlogin")
+      }
+    },
      loadCarStore(){
        request.get("/carstore",{
          params:{
@@ -222,6 +313,9 @@ export default {
     },
     handleChange(){
       this.allPrice = res.data.records[0].price.split("-")[0] * 10000 * this.num
+
+    },
+    handleAvatarSuccess(){
 
     }
   },
